@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.BalanceRecordMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, balance, memo, memberId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.BalanceRecord" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM balance_record
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM balance_record
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.BalanceRecord">
+		 INSERT INTO balance_record
+ 		(createDate,modifyDate,balance,memo,memberId) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{balance},#{memo},#{memberId})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.BalanceRecord">
+		 INSERT INTO balance_record
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="balance != null">
+				 balance,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+			<if test="memberId != null">
+				 memberId,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="balance!=null">
+				 #{balance},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+			<if test="memberId!=null">
+				 #{memberId},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.BalanceRecord">
+		 UPDATE balance_record
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="balance != null">
+				 balance = #{balance},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+			<if test="memberId != null">
+				 memberId = #{memberId},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.BalanceRecord">
+		 UPDATE balance_record
+		 SET 
+			 modifyDate = #{modifyDate},
+			 balance = #{balance},
+			 memo = #{memo},
+			 memberId = #{memberId}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM balance_record
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND balance_record.id = #{id} 
+			</if>
+ --> 
+		 order by balance_record.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM balance_record
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND balance_record.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.BalanceRecord" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM balance_record
+	</select>
+
+</mapper>

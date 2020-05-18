@@ -1,0 +1,80 @@
+.post_msg_from li.luntan-inp,
+.post_from li.luntan-inp {
+	line-height: 52px;
+	padding: 0 10px;
+	font-size: 17px;
+	/* height: 46px; */
+}
+
+.post_msg_from textarea,
+.post_from textarea {
+	border: 0;
+	width: 100%;
+	background: none;
+	padding: 19px 0;
+	font-size: 16px;
+}
+
+.post_from {
+	border-bottom: 1px solid #d8d8d8;
+}
+
+.box-pingjia-label {
+	width: 90%;
+	padding: 0 5%;
+	background: #fff;
+	margin: 0 auto;
+}
+
+.box-pingjia-label ul {
+	padding: 15px 0;
+}
+
+.box-pingjia-label ul li {
+	width: 30%;
+	float: left;
+	margin: 0 1.5% 0 1%;
+	border: 1px solid #d0d0d0;
+	color: #4c4c4c;
+	text-align: center;
+	border-radius: 15px;
+	padding: 5px 0;
+	margin-bottom: 8px;
+}
+
+.box-pingjia-label ul li.cur {
+	background: #ff7d84;
+	border: 1px solid #ff7d84;
+	color: #fff;
+}
+
+.xingji {
+	width: 90%;
+	margin: 4% auto;
+	display: block;
+}
+
+.item_starLists {
+	width: 80%;
+	margin: 0 auto;
+	height: 34px;
+	line-height: 34px;
+}
+
+.item_starLists ul {
+	height: 34px;
+	line-height: 34px;
+}
+
+.item_starLists ul li {
+	width: 13%;
+	height: 34px;
+	float: left;
+	background: url(../images/star-off.png) center top no-repeat;
+	background-size: 25px auto;
+}
+
+.item_starLists ul li.on {
+	background: url(../images/star-on.png) center top no-repeat;
+	background-size: 25px auto;
+}

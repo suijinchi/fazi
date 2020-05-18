@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.ReceiverMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, consignee, contactNumber, areaName, address, zipCode, isDefault, memberId, areaId,orderer,ordererNumber
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Receiver" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM receiver
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM receiver
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Receiver">
+		 INSERT INTO receiver
+ 		(createDate,modifyDate,consignee,contactNumber,areaName,address,zipCode,isDefault,memberId,areaId,orderer,ordererNumber)
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{consignee},#{contactNumber},#{areaName},#{address},#{zipCode},#{isDefault},#{memberId},#{areaId},#{orderer},#{ordererNumber})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Receiver">
+		 INSERT INTO receiver
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="consignee != null">
+				 consignee,
+			</if>
+			<if test="contactNumber != null">
+				 contactNumber,
+			</if>
+			<if test="areaName != null">
+				 areaName,
+			</if>
+			<if test="address != null">
+				 address,
+			</if>
+			<if test="zipCode != null">
+				 zipCode,
+			</if>
+			<if test="isDefault != null">
+				 isDefault,
+			</if>
+			<if test="memberId != null">
+				 memberId,
+			</if>
+			<if test="areaId != null">
+				 areaId,
+			</if>
+			<if test="orderer != null">
+				orderer,
+			</if>
+			<if test="ordererNumber != null">
+				ordererNumber,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="consignee!=null">
+				 #{consignee},
+			</if>
+			<if test="contactNumber!=null">
+				 #{contactNumber},
+			</if>
+			<if test="areaName!=null">
+				 #{areaName},
+			</if>
+			<if test="address!=null">
+				 #{address},
+			</if>
+			<if test="zipCode!=null">
+				 #{zipCode},
+			</if>
+			<if test="isDefault!=null">
+				 #{isDefault},
+			</if>
+			<if test="memberId!=null">
+				 #{memberId},
+			</if>
+			<if test="areaId!=null">
+				 #{areaId},
+			</if>
+			<if test="orderer !=null">
+				 #{orderer},
+			</if>
+			<if test="ordererNumber !=null">
+				 #{ordererNumber},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Receiver">
+		 UPDATE receiver
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="consignee != null">
+				 consignee = #{consignee},
+			</if>
+			<if test="contactNumber != null">
+				 contactNumber = #{contactNumber},
+			</if>
+			<if test="areaName != null">
+				 areaName = #{areaName},
+			</if>
+			<if test="address != null">
+				 address = #{address},
+			</if>
+			<if test="zipCode != null">
+				 zipCode = #{zipCode},
+			</if>
+			<if test="isDefault != null">
+				 isDefault = #{isDefault},
+			</if>
+			<if test="memberId != null">
+				 memberId = #{memberId},
+			</if>
+			<if test="areaId != null">
+				 areaId = #{areaId},
+			</if>
+			<if test="orderer != null">
+				orderer = #{orderer},
+			</if>
+			<if test="ordererNumber != null">
+				ordererNumber = #{ordererNumber},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Receiver">
+		 UPDATE receiver
+		 SET 
+			 modifyDate = #{modifyDate},
+			 consignee = #{consignee},
+			 contactNumber = #{contactNumber},
+			 areaName = #{areaName},
+			 address = #{address},
+			 zipCode = #{zipCode},
+			 isDefault = #{isDefault},
+			 memberId = #{memberId},
+			 areaId = #{areaId},
+			 ordererNumber = #{ordererNumber},
+			 orderer = #{orderer}
+		 WHERE id = #{id}
+	</update>	
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM receiver
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND receiver.id = #{id} 
+			</if>
+ --> 
+		 order by receiver.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM receiver
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND receiver.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Receiver" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM receiver
+	</select>
+	<!-- 依据会员ID查询收货人地址信息 add by hawkbird date 2018-04-04 -->
+	<select id="queryAddressByMemberId" resultType="java.util.Map">
+		select
+		id,
+		consignee,
+		consignee as receiver,
+		contactNumber,
+		contactNumber as mobile,
+		areaName,
+		areaName areaname,
+		address,
+		zipcode,
+		ifnull(isDefault,0) as isdefault,
+		ifnull(isDefault,0) as isDefault,
+		orderer,
+		ordererNumber
+		from receiver where memberid=#{memberid}
+		order by isdefault desc
+	</select>
+	<!-- 依据会员ID取消默认地址 add by hawkbird date 2018-04-08 -->
+	<update id="updateNoDefaultByMemberId" parameterType="java.lang.Long">
+		update receiver set isDefault=0 where memberId=#{memberId}
+	</update>
+
+	<select id="getDefault" resultType="com.zhengbangnet.modules.entity.Receiver" parameterType="java.lang.Long">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM receiver
+		WHERE memberId = #{memberId} and isDefault = 1 limit 1
+	</select>
+
+</mapper>

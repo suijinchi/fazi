@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.ProductCategoryMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, name, orders, isDisplay,indexShowUrl
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.ProductCategory" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM product_category
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM product_category
+		 WHERE id = #{id}
+	</delete>
+
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.ProductCategory">
+		INSERT INTO product_category
+		(createDate,modifyDate,name,orders,isDisplay,indexShowUrl)
+		VALUES
+		(#{createDate},#{modifyDate},#{name},#{orders},#{isDisplay},#{indexShowUrl})
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.ProductCategory">
+		INSERT INTO product_category
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				createDate,
+			</if>
+			<if test="modifyDate != null">
+				modifyDate,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="orders != null">
+				orders,
+			</if>
+			<if test="isDisplay != null">
+				isDisplay,
+			</if>
+			<if test="indexShowUrl != null">
+				indexShowUrl,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				#{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				#{modifyDate},
+			</if>
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="orders!=null">
+				#{orders},
+			</if>
+			<if test="isDisplay!=null">
+				#{isDisplay},
+			</if>
+			<if test="indexShowUrl!=null">
+				#{indexShowUrl},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.ProductCategory">
+		UPDATE product_category
+		<set>
+			<if test="modifyDate != null">
+				modifyDate = #{modifyDate},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="orders != null">
+				orders = #{orders},
+			</if>
+			<if test="isDisplay != null">
+				isDisplay = #{isDisplay},
+			</if>
+			<if test="indexShowUrl != null">
+				indexShowUrl = #{indexShowUrl},
+			</if>
+
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.ProductCategory">
+		 UPDATE product_category
+		 SET 
+			 modifyDate = #{modifyDate},
+			 name = #{name},
+			 orders = #{orders},
+			 isDisplay = #{isDisplay},
+			 indexShowUrl = #{indexShowUrl}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM product_category
+		 where 1=1 
+		 order by product_category.createDate desc
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM product_category
+		 WHERE 1=1 
+	</select>
+
+
+	<select id="findListByParams" resultType="java.util.Map">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM product_category pc
+		<where>
+			<if test="isDisplay!=null">
+				  pc.isDisplay = #{isDisplay}
+			</if>
+		</where>
+		order by if(isnull(pc.orders),0,1) desc,pc.orders asc,pc.createDate desc
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.ProductCategory" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM product_category
+		 ORDER BY orders
+	</select>
+
+</mapper>

@@ -1,0 +1,627 @@
+.team-header {
+	width: 100%;
+	height: 46px;
+	line-height: 46px;
+	background: #cecdcd;
+	text-align: center;
+	z-index: 2;
+	position: fixed;
+	left: 0;
+	top: 0;
+}
+
+.team-header ul {
+	display: flex;
+}
+
+.team-header ul li {
+	text-align: center;
+	color: #fff;
+	flex: 1;
+}
+
+.team-header ul li a {
+	color: #fff;
+	cursor: pointer;
+	display: block;
+}
+
+.team-header ul li a.cur {
+	background: #448bf7;
+	display: block;
+}
+
+.team-header .select {
+	background: none;
+	border: 0;
+	color: #fff;
+	text-align: center;
+	margin: 0 auto;
+	text-align: center;
+	font-size: 1em;
+	-webkit-appearance: none;
+	z-index: 2;
+}
+
+.team-select {
+	position: absolute;
+	top: 46px;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	padding: 1% 0;
+	z-index: 2;
+}
+
+.team-select ul li {
+	color: #333;
+}
+
+.team-select ul li.cur {
+	color: #222;
+}
+
+.team-select ul li a {
+	display: block;
+	margin: 0 2%;
+	padding: 0 2%;
+	height: 36px;
+	line-height: 36px;
+	font-size: 0.9em;
+	border-bottom: 1px solid #f3f3f3;
+}
+
+.team-select ul li:last-child a {
+	border-bottom: 0;
+}
+
+.team-select ul li .cur {
+	color: #ff6666;
+}
+
+.shadeBox {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	background: rgba(0, 0, 0, 0.7);
+}
+
+.teamBox {
+	padding-top: 50px;
+}
+
+.teamBox .item-team {
+	width: 96%;
+	background: #fff;
+	padding: 2%;
+	height: 3rem;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	margin-bottom: 5px;
+}
+
+.teamBox .item-team .teamMess {
+	flex: 1;
+}
+
+.teamBox .item-team .teamMess h3 {
+	font-size: 1em;
+	color: #333;
+	font-weight: normal;
+	line-height: 30px;
+}
+
+.teamBox .item-team .teamMess h3 .icon {
+	background: #ff6666;
+	font-size: 0.8em;
+	color: #fff;
+	padding: 0 4px;
+	border-radius: 5px;
+	margin-left: 2%;
+}
+
+.teamBox .item-team .teamMess .mess {
+	font-size: 0.9em;
+	color: #888686;
+}
+
+.teamBox .item-team .teamMess .time {
+	font-size: 0.8em;
+	color: #ccc;
+	line-height: 30px;
+}
+
+.teamBox .myScore {
+	padding: 0 10px;
+	text-align: right;
+	font-size: 1em;
+	color: #888;
+	height: 40px;
+	line-height: 40px;
+	/*background: #fff;*/
+	/*border-bottom: 1px solid #ccc;*/
+}
+
+.zy_code {
+	width: 100%;
+	height: 100%;
+	background: #2d3132;
+}
+
+.zy_code .title {
+	font-size: 1em;
+	color: #fff;
+	padding: 1em 0;
+	text-align: center;
+}
+
+.zy_code .title span {
+	color: #ff316a;
+}
+
+.zy_body {
+	width: 95%;
+	margin: 0 auto;
+	height: 90%;
+	background: #fff;
+}
+
+.zy_body .box1 {
+	height: 10rem;
+	background: url(../images/qocode-bg.png) center top no-repeat;
+	background-size: 100% auto;
+	color: #FFF;
+	font-size: 1.1em;
+	padding: 1em;
+}
+
+.zy_body .box1 .leftImg img {
+	width: 60px;
+	height: 60px;
+	border-radius: 100%;
+}
+
+.zy_body .box1 .rightMess {
+	padding-top: 0.6em;
+	padding-left: 1em;
+}
+
+.zy_body .box2 {
+	background: #fff;
+	padding: 0 0 2% 0;
+}
+
+.zy_body .box2 .leftImg img {
+	width: 100px;
+}
+
+.zy_body .box2 .rightMess {
+	padding-top: 0em;
+	padding-left: 1em;
+	font-size: 1.4em;
+	color: #333;
+}
+
+.zy_body .box3 {
+	margin-bottom: 15%;
+	text-align: center;
+	line-height: 40px;
+}
+
+.zy_body .box3 img {
+	width: 50%;
+	padding: 3px;
+	display: block;
+	margin: 5% auto 0% auto;
+	border-top: 4px solid #4f54b9;
+	border-left: 4px solid #7f25b3;
+	border-right: 4px solid #267ebf;
+	border-bottom: 4px solid #04a0c4;
+}
+
+.categoryBox {
+	width: 100%;
+	height: 45px;
+	line-height: 45px;
+	background: #bbb;
+	margin-bottom: 10px;
+}
+
+.categoryBox ul li {
+	float: left;
+	width: 33.3%;
+	text-align: center;
+	color: #fff;
+}
+
+.categoryBox ul li.cur {
+	background: #448bf7;
+}
+
+.teamHead {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	background: #fff;
+}
+
+.teamHead .team-category ul li {
+	float: left;
+	width: 33.3%;
+	text-align: center;
+	color: #444343;
+}
+
+.teamHead .team-category ul li.current {
+	background: #e86883;
+	color: #fff;
+}
+
+.item-home {
+	width: 100%;
+	background: #fff;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	font-size: 1em;
+	color: #232323;
+}
+
+.mzdj-color {
+	color: #e86883;
+}
+
+.pd2 {
+	padding: 0 2%;
+}
+
+.bg-white {
+	background: #fff;
+}
+
+.item-home label {
+	padding: 0 10px;
+	width: 50px;
+	line-height: 40px;
+	display: inline-block;
+	float: left;
+}
+
+.item-home .reg-inp {
+	max-width:80%;
+	display: inline-block;
+	border: 0;
+	line-height: 40px;
+	font-size: 1em;
+	-webkit-appearance: none;
+	border: 0;
+	color: #8f8f8f;
+	outline: none;
+	float: left;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.bb-home {
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.mzdj-btn {
+	display: block;
+	width: 68%;
+	height: 2.5rem;
+	line-height: 2.5rem;
+	border-radius: 6px;
+	margin: 0 auto;
+	background: #ff7d84;
+	color: #fff;
+	text-align: center;
+	font-size: 1em;
+	box-shadow: 1px 1px 2px #ccc;
+}
+/*成为会员*/
+.mzdj-welcome{
+	width: 100%;
+	background: #fff;
+}
+.mzdj-welcome img{
+	display: block;
+	margin: 0 auto;
+}
+.mzdj-welcome .title{
+	width: 38%;
+	padding: 2% 0;
+}
+.mzdj-welcome .btn-home{
+	margin: 0 6%;
+	display: block;
+}
+.mzdj-welcome .adver{
+	font-size: 1em;
+	color: #000;
+	line-height: 1.5rem;
+	text-align: center;
+	font-weight: 600;
+}
+.mzdj-welcome .line-small{
+	width: 48%;
+	height: 1px;
+	border-top: 1.5px solid #e13160;
+	display: block;
+	margin: 1% auto;
+}
+.mzdj-welcome .line-big{
+	width: 66%;
+	height: 1px;
+	border-top: 1.5px solid #e13160;
+	display: block;
+	margin: 3% auto;
+}
+.mzdj-welcome .non-number{
+	width: 88%;
+	margin: 0 6%;
+	height: 4.5rem;
+	background: #e96884;
+}
+.mzdj-welcome .non-number h4{
+	text-align: center;
+	font-size: 14px;
+	color: #fff;
+	padding-top: 1rem;
+}
+.mzdj-welcome .non-number .btn-buy{
+	font-size: 1rem;
+	color: #fff;
+	float: right;
+	margin-right: 4%;
+}
+.mzdj-welcome .smallIcon{
+	width: 88%;
+	margin: 0.8rem 6%;
+}
+.mzdj-welcome .box-gifts{
+	width: 88%;
+	margin: 0 6%;
+}
+.mzdj-welcome .box-gifts .left{
+	width: 50%;
+	float: left;
+}
+.mzdj-welcome .box-gifts .right{
+	width: 50%;
+	float: left;
+}
+.mzdj-welcome .box-gifts .right .giftsBody{
+	text-align: center;
+	font-weight: 600;
+	color: #000000;
+	padding-top: 1.2rem;
+	font-size: 0.9em;
+}
+.mzdj-welcome .box-gifts .right .btn-lingqu{
+	padding: 0 5%;
+	width: 40%;
+	color: #fff;
+	display: block;
+	line-height: 2.2rem;
+	border-radius: 2px;
+	margin: 0.5rem auto;
+	text-align: center;
+	background: #e86883;
+}
+.mzdj-empty{
+	width: 100%;
+	margin: 0 auto;
+}
+.mzdj-empty .empty-icon{
+	width: 40%;
+	margin: 0 auto;
+	display: block;
+	padding-top: 20%;
+	padding-bottom: 5%;
+}
+.mzdj-empty .empty-content{
+	text-align: center;
+	font-size: 1em;
+	line-height: 26PX;
+	color: #4c4c4c;
+}
+/*邀请好友*/
+.mzdj-qrcode{
+	
+}
+.mzdj-qrcode .codeBox{
+	margin: 4% auto;
+	width: 40%;
+	display: block;
+}
+.mzdj-qrcode .box-words{
+	font-size: 1em;
+	line-height: 1.6em;
+	text-align: center;
+	color: #262626;
+	text-align: center;
+	margin-top: 3%;
+}
+.mzdj-qrcode .qrcode-word{
+	line-height: 2rem;
+	padding-bottom: 2em;
+	font-size: 1em;
+	color: #262626;
+	text-align: center;
+}
+#p_bag{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 99;
+	background:rgba(0,0,0,0.7);
+}
+.box_topShare{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+/*个人中心*/
+.mzdj-myselfTop{
+	width: 100%;
+	height: 8em;
+	padding: 2em 0;
+	color: #fff;
+	text-align: center;
+	background: linear-gradient(from top to bottom,#fa839c,#e86883);
+    filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
+    -ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);/*IE8*/	
+    background:#e86883; /* 一些不支持背景渐变的浏览器 */  
+    background:-moz-linear-gradient(top, #fa839c,#e86883);  
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ff6273), to(#e86883));  
+    background:-o-linear-gradient(top, #fa839c, #e86883); 
+}
+.mzdj-myselfTop img{
+	width: 5em;
+	border-radius: 100%;
+}
+.mzdj-myselfTop .mes{
+	font-size: 1em;
+	line-height: 1.6em;
+	margin-top: 0.3em;
+	
+}
+.mzdj-myselfTop .mes span{
+	padding: 0 5px;
+	background: #fff;
+	color: #ff2e45;
+	height: 16px;
+	display: inline-block;
+	line-height: 16px;
+	border-radius: 5px;
+	margin-left: 5px;
+	font-size: 0.8em;
+}
+.mzdj-myselfTop h3{
+	font-size: 1em;
+	line-height: 2em;
+	font-weight: normal;
+}
+
+/*中间*/
+.rt {
+    float: right;
+}
+#mell {
+	width: 100%;
+	background: #fff;
+	font-size: 1em;
+}
+#mell a{
+	display: block;
+}
+li.ritpc {
+    width: 86%;
+}
+.mr-4{
+	margin-right: 4%;
+}
+
+#mell ul {
+	width: 100%;
+	overflow: hidden;
+	height: 2.8em;
+	line-height:2.8em;
+	font-size: 1em;
+	border-bottom: 1px solid #eee;
+}
+
+#mell ul li.litpc {
+	width: 22px;
+	margin-left: 10px;
+	margin-right: 4px;
+}
+
+#mell>ul a {
+	display: inline-block;
+	width: 100%;
+}
+/*代理商*/
+.agent_box{
+	width: 100%;
+	margin: 0 auto;
+}
+.agent_box .agent_head{
+	widows: 100%;
+	background: #fff;
+	text-align: center;
+	padding: 0.5em 0;
+	color: #2d2d2d;
+	font-size: 1em;
+}
+.agent_box .agent_head .bbr{
+	position: relative;
+}
+.agent_box .agent_head .bbr:after{
+	display: block;
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 0.6em;
+	height: 2em;
+	border-right: 1px solid #787878;
+}
+.agent_box .agent_head h3{
+	font-weight: normal;
+	font-size: 1.2em;
+	color: #e83731;
+}
+.agent_box .agent_body{
+	margin-top: 0.6em;
+	background: #fff;
+	text-align: center;
+	margin-bottom: 10px;
+}
+.agent_box .agent_body .item-agent .weui-flex{
+	height: 2.5em;
+	line-height: 2.5em;
+	border-bottom: 1px solid #eaeaea;
+}
+.agent_box .agent_body .item-agent .weui-flex:last-child{
+	border-bottom: 0;
+}
+.agent_box .agent_body .item-agent i{
+	font-size: 1.2em;
+	vertical-align: top;
+	margin-right: 0.3em;
+}
+/*2018-2-3欢迎页修改*/
+.user-select{
+	width: 96%;
+	margin: 0 auto;
+}
+.user-select .item-u{
+	width: 46%;
+	margin:0 2%;
+	float: left;
+	margin-top: 3%;
+	margin-bottom: 1%;
+}
+.user-select .item-u img{
+	border: 2px solid #fc9db3;
+}
+/*2018-2-3欢迎页修改*/
+@media only screen and (min-width: 100px) and (max-width: 375px) {
+	.height{
+		margin-bottom: 30px;
+		display: block;
+	}
+	.mzdj-welcome .box-gifts .right .giftsBody {
+	    text-align: center;
+	    font-weight: 600;
+	    color: #000000;
+	    padding-top: 1.2rem;
+	    font-size: 0.7em;
+	}
+}

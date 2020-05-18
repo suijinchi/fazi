@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.OrdersItemMapper">
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		point,id, createDate, modifyDate, name, price, quantity, sn,
+		thumbnail, ordersId, productId, productSpec, productStockId,subname,birthdayCard,productStockId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.OrdersItem"
+		parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM orders_item
+		WHERE id = #{id}
+	</select>
+	
+	<!-- 根据订单ID查询订单中商品详情 -->
+	<select id="getByOrdersId" resultType="com.zhengbangnet.modules.entity.OrdersItem"
+		parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM orders_item
+		WHERE ordersId = #{ordersId}
+	</select>
+
+
+	<select id="findByOrdersId" resultType="java.util.Map"
+			parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM orders_item
+		WHERE ordersId = #{ordersId}
+	</select>
+
+	<!--删除：根据主键ID删除 -->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		DELETE FROM orders_item
+		WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.OrdersItem">
+		INSERT INTO orders_item
+		(point,createDate,modifyDate,name,price,quantity,sn,thumbnail,ordersId,productId,productSpec,subname,birthdayCard,productStockId)
+		VALUES
+		(#{point},#{createDate},#{modifyDate},#{name},#{price},#{quantity},#{sn},#{thumbnail},#{ordersId},#{productId},#{productSpec},#{subname},#{birthdayCard},#{productStockId})
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 添加 （匹配有值的字段） -->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.OrdersItem">
+		INSERT INTO orders_item
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productSpec != null">
+				 productSpec,
+			</if>
+			<if test="point != null">
+				 point,
+			</if>
+			<if test="createDate != null">
+				createDate,
+			</if>
+			<if test="modifyDate != null">
+				modifyDate,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+			<if test="quantity != null">
+				quantity,
+			</if>
+			<if test="sn != null">
+				sn,
+			</if>
+			<if test="thumbnail != null">
+				thumbnail,
+			</if>
+			<if test="ordersId != null">
+				ordersId,
+			</if>
+			<if test="productId != null">
+				productId,
+			</if>
+			<if test="subname != null">
+				subname,
+			</if>
+			<if test="birthdayCard != null">
+				birthdayCard,
+			</if>
+			<if test="productStockId != null">
+				productStockId,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="productSpec!=null">
+				 #{productSpec},
+			</if>
+			<if test="point!=null">
+				 #{point},
+			</if>
+			<if test="createDate!=null">
+				#{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				#{modifyDate},
+			</if>
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="price!=null">
+				#{price},
+			</if>
+			<if test="quantity!=null">
+				#{quantity},
+			</if>
+			<if test="sn!=null">
+				#{sn},
+			</if>
+			<if test="thumbnail!=null">
+				#{thumbnail},
+			</if>
+			<if test="ordersId!=null">
+				#{ordersId},
+			</if>
+			<if test="productId!=null">
+				#{productId},
+			</if>
+			<if test="subname!=null">
+				#{subname},
+			</if>
+			<if test="birthdayCard!=null">
+				#{birthdayCard},
+			</if>
+			<if test="productStockId!=null">
+				#{productStockId},
+			</if>
+
+
+		</trim>
+	</insert>
+
+	<!-- 修 改 -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.OrdersItem">
+		UPDATE orders_item
+		<set>
+			<if test="productSpec != null">
+				 productSpec = #{productSpec},
+			</if>
+			<if test="point != null">
+				 point = #{point},
+			</if>
+			<if test="modifyDate != null">
+				modifyDate = #{modifyDate},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="quantity != null">
+				quantity = #{quantity},
+			</if>
+			<if test="sn != null">
+				sn = #{sn},
+			</if>
+			<if test="thumbnail != null">
+				thumbnail = #{thumbnail},
+			</if>
+			<if test="ordersId != null">
+				ordersId = #{ordersId},
+			</if>
+			<if test="productId != null">
+				productId = #{productId},
+			</if>
+			<if test="subname != null">
+				subname = #{subname},
+			</if>
+			<if test="birthdayCard != null">
+				birthdayCard = #{birthdayCard},
+			</if>
+			<if test="productStockId != null">
+				productStockId = #{productStockId},
+			</if>
+
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 修 改 -->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.OrdersItem">
+		UPDATE orders_item
+		SET
+		productSpec = #{productSpec},
+		point = #{point},
+		modifyDate = #{modifyDate},
+		name = #{name},
+		price = #{price},
+		quantity = #{quantity},
+		sn = #{sn},
+		thumbnail = #{thumbnail},
+		ordersId = #{ordersId},
+		subname = #{subname},
+		productId = #{productId},
+		birthdayCard = #{birthdayCard},
+		productStockId = #{productStockId}
+		WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询 -->
+	<select id="findPageByParams" resultType="java.util.Map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM orders_item
+		where 1=1
+		<!-- <if test="id != null "> AND orders_item.id = #{id} </if> -->
+		order by orders_item.createDate desc
+		LIMIT #{pageable.firstResult},#{pageable.pageSize}
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long">
+		SELECT COUNT(id) FROM orders_item
+		WHERE 1=1
+		<!-- <if test="id != null "> AND orders_item.id = #{id} </if> -->
+	</select>
+
+	<select id="findListByParams" resultType="java.util.Map">
+		select
+		a.productId,
+		a.name,
+		a.price,
+		a.quantity,
+		a.productSpec,
+		a.sn,
+		IFNULL(a.price,0)*IFNULL(a.quantity,0) as xj,
+		ifnull(a.thumbnail,'') as thumbnail 
+		from orders_item a
+		where a.ordersId = #{ordersId}
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.OrdersItem">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM orders_item
+	</select>
+
+</mapper>

@@ -1,0 +1,202 @@
+@charset "utf-8";
+
+/*通用*/
+body {
+	font: 14px "microsoft yahei", Arial, Helvetica, sans-serif;
+	color: #666;
+	margin: 0px;
+}
+.min-width{
+	width: 100%;
+	max-width: 460px;
+	margin: 0 auto;
+}
+ul,
+li,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd {
+	margin: 0px;
+	padding: 0px;
+	border: none;
+	list-style: none;
+}
+
+.clearfix:after {
+	content: '';
+	display: block;
+	clear: both;
+	line-height: 0;
+	height: 0;
+	visibility: hidden
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.lt {
+	float: left;
+}
+
+.rt {
+	float: right;
+}
+
+i {
+	display: inline-block;
+}
+
+i img {
+	width: 100%;
+}
+
+#main {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	background: #f6f6f6;
+	font-family: "microsoft yahei", Arial, Helvetica, sans-serif;
+	position: relative;
+}
+
+div.gd {
+	width: 100%;
+	height: 10px;
+	background: #f6f6f6;
+}
+
+input {
+	-webkit-tap-highlight-color: transparent;
+}
+
+.clear{
+	clear: both;
+}
+/*底部菜单*/
+
+#footer {
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	height: 44px;
+	background: #fff;
+	border-top: 1px solid #eee;
+}
+
+#footer a {
+	float: left;
+	width: 33.3%;
+	height: 44px;
+	text-align: center;
+	font-size: 11px;
+}
+
+#footer a p.p1 i {
+	width: 25px;
+}
+
+#footer a.active {
+	color: #f54548;
+}
+
+.empty {
+	display: none;
+}
+
+#main div.empty {
+	width: 100%;
+	text-align: center;
+	color: #999;
+	position: absolute;
+	top: 141px;
+	left: 0;
+}
+
+#main div.empty p.p1 {
+	width: 70px;
+	margin: 0 auto;
+}
+
+#main div.empty p.p1 img {
+	width: 100%;
+}
+
+#main div.empty p.p2 {
+	margin-top: 20px;
+	font-size: 12px;
+}
+
+#main div.empty a {
+	display: block;
+	width: 100px;
+	height: 25px;
+	line-height: 25px;
+	color: #999;
+	font-size: 12px;
+	margin: 0 auto;
+	margin-top: 13px;
+	border: 1px solid #eee;
+	background: #fff;
+}
+
+.pos-r {
+	position: relative;
+}
+
+.pos-a {
+	position: absolute;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+a{
+	-webkit-tap-highlight-color: transparent;
+}
+.returnTop {
+	opacity: 0.7;
+	border-radius: 50%;
+	position: fixed;
+	right: 0;
+	bottom: 20%;
+	z-index: 99;
+	display: block;
+}
+
+.returnTop i {
+	font-size: 48px;
+	color: #888;
+}
+.wrap_kefu{
+	width: 90%;
+	margin: 0 auto;
+	background: #fff;
+	padding:10% 2%;
+	text-align: center;
+	color: #666;
+	border-radius: 20px;
+	display: none;
+}
+.wrap_kefu img{
+	width: 80%;
+	margin: 0 auto;
+}

@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.CouponMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, name, subname, validDateType, validStartDate, validEndDate, validGetDay,
+		validDays, type, cutMoney, discount, useType, byFull, memo, useMemo, useScope, couponTypeId,
+		useDate,status,memberId,ordersId,sourceMemberId,scene,isWithPointShare,sysAdminId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Coupon" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM coupon
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM coupon
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Coupon">
+		 INSERT INTO coupon
+ 		(createDate,modifyDate,name,subname,validDateType,validStartDate,validEndDate,validGetDay,validDays,type,
+		cutMoney,discount,useType,byFull,memo,useMemo,useScope,couponTypeId,useDate,status,memberId,ordersId,sourceMemberId,scene,isWithPointShare,sysAdminId)
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{name},#{subname},#{validDateType},#{validStartDate},#{validEndDate},#{validGetDay},
+		#{validDays},#{type},#{cutMoney},#{discount},#{useType},#{byFull},#{memo},#{useMemo},#{useScope},#{couponTypeId},
+		#{useDate},#{status},#{memberId},#{ordersId},#{sourceMemberId},#{scene},#{isWithPointShare},#{sysAdminId})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Coupon">
+		 INSERT INTO coupon
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="subname != null">
+				 subname,
+			</if>
+			<if test="validDateType != null">
+				 validDateType,
+			</if>
+			<if test="validStartDate != null">
+				 validStartDate,
+			</if>
+			<if test="validEndDate != null">
+				 validEndDate,
+			</if>
+			<if test="validGetDay != null">
+				 validGetDay,
+			</if>
+			<if test="validDays != null">
+				 validDays,
+			</if>
+			<if test="type != null">
+				 type,
+			</if>
+			<if test="cutMoney != null">
+				 cutMoney,
+			</if>
+			<if test="discount != null">
+				 discount,
+			</if>
+			<if test="useType != null">
+				 useType,
+			</if>
+			<if test="byFull != null">
+				 byFull,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+			<if test="useMemo != null">
+				 useMemo,
+			</if>
+			<if test="useScope != null">
+				 useScope,
+			</if>
+			<if test="couponTypeId != null">
+				 couponTypeId,
+			</if>
+			<if test="useDate != null">
+				useDate,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="memberId != null">
+                memberId,
+			</if>
+			<if test="ordersId != null">
+				ordersId,
+			</if>
+			<if test="sourceMemberId != null">
+				sourceMemberId,
+			</if>
+			<if test="scene != null">
+				scene,
+			</if>
+			<if test="isWithPointShare != null">
+				isWithPointShare,
+			</if>
+			 <if test="sysAdminId != null">
+				 sysAdminId,
+			 </if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="subname!=null">
+				 #{subname},
+			</if>
+			<if test="validDateType!=null">
+				 #{validDateType},
+			</if>
+			<if test="validStartDate!=null">
+				 #{validStartDate},
+			</if>
+			<if test="validEndDate!=null">
+				 #{validEndDate},
+			</if>
+			<if test="validGetDay!=null">
+				 #{validGetDay},
+			</if>
+			<if test="validDays!=null">
+				 #{validDays},
+			</if>
+			<if test="type!=null">
+				 #{type},
+			</if>
+			<if test="cutMoney!=null">
+				 #{cutMoney},
+			</if>
+			<if test="discount!=null">
+				 #{discount},
+			</if>
+			<if test="useType!=null">
+				 #{useType},
+			</if>
+			<if test="byFull!=null">
+				 #{byFull},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+			<if test="useMemo!=null">
+				 #{useMemo},
+			</if>
+			<if test="useScope!=null">
+				 #{useScope},
+			</if>
+			<if test="couponTypeId!=null">
+				 #{couponTypeId},
+			</if>
+			<if test="useDate!=null">
+				 #{useDate},
+			</if>
+			<if test="status!=null">
+				 #{status},
+			</if>
+			<if test="memberId !=null">
+				 #{memberId},
+			</if>
+			<if test="ordersId !=null">
+				 #{ordersId},
+			</if>
+			<if test="sourceMemberId !=null">
+				 #{sourceMemberId},
+			</if>
+			<if test="scene !=null">
+				 #{scene},
+			</if>
+			<if test="isWithPointShare !=null">
+				 #{isWithPointShare},
+			</if>
+			 <if test="sysAdminId !=null">
+				 #{sysAdminId},
+			</if>
+
+		 </trim>
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Coupon">
+		 UPDATE coupon
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="subname != null">
+				 subname = #{subname},
+			</if>
+			<if test="validDateType != null">
+				 validDateType = #{validDateType},
+			</if>
+			<if test="validStartDate != null">
+				 validStartDate = #{validStartDate},
+			</if>
+			<if test="validEndDate != null">
+				 validEndDate = #{validEndDate},
+			</if>
+			<if test="validGetDay != null">
+				 validGetDay = #{validGetDay},
+			</if>
+			<if test="validDays != null">
+				 validDays = #{validDays},
+			</if>
+			<if test="type != null">
+				 type = #{type},
+			</if>
+			<if test="cutMoney != null">
+				 cutMoney = #{cutMoney},
+			</if>
+			<if test="discount != null">
+				 discount = #{discount},
+			</if>
+			<if test="useType != null">
+				 useType = #{useType},
+			</if>
+			<if test="byFull != null">
+				 byFull = #{byFull},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+			<if test="useMemo != null">
+				 useMemo = #{useMemo},
+			</if>
+			<if test="useScope != null">
+				 useScope = #{useScope},
+			</if>
+			<if test="couponTypeId != null">
+				 couponTypeId = #{couponTypeId},
+			</if>
+			<if test="useDate != null">
+				useDate = #{useDate},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="memberId != null">
+                memberId = #{memberId},
+			</if>
+			<if test="ordersId != null">
+				ordersId = #{ordersId},
+			</if>
+			<if test="sourceMemberId != null">
+				sourceMemberId = #{sourceMemberId},
+			</if>
+			<if test="scene != null">
+				scene = #{scene},
+			</if>
+			<if test="isWithPointShare != null">
+				isWithPointShare = #{isWithPointShare},
+			</if>
+			 <if test="sysAdminId != null">
+				 sysAdminId = #{sysAdminId},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Coupon">
+		 UPDATE coupon
+		 SET 
+			 modifyDate = #{modifyDate},
+			 name = #{name},
+			 subname = #{subname},
+			 validDateType = #{validDateType},
+			 validStartDate = #{validStartDate},
+			 validEndDate = #{validEndDate},
+			 validGetDay = #{validGetDay},
+			 validDays = #{validDays},
+			 type = #{type},
+			 cutMoney = #{cutMoney},
+			 discount = #{discount},
+			 useType = #{useType},
+			 byFull = #{byFull},
+			 memo = #{memo},
+			 useMemo = #{useMemo},
+			 useScope = #{useScope},
+			 couponTypeId = #{couponTypeId},
+			 useDate = #{useDate},
+			 status = #{status},
+			 memberId = #{memberId},
+			 ordersId = #{ordersId},
+			 sourceMemberId = #{sourceMemberId},
+			 scene = #{scene},
+			 isWithPointShare = #{isWithPointShare},
+			 sysAdminId = #{sysAdminId},
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		  c.*,m.nickname,m.avatarUrl,m.name memberName,m.mobile,
+		sa.name sysAdminName,
+		(select ct.createDate from coupon_task ct
+		 join coupon_task_detail ctd on ctd.couponTaskId = ct.id
+		 join coupon cc on cc.id = ctd.couponId
+		 where 1=1 and cc.id = c.id ) couponTaskDate
+
+		 FROM coupon c
+         join member m on c.memberId = m.id
+		left join sys_admin sa on c.sysAdminId = sa.id
+		 where 1=1
+		<if test="nickname != null and nickname!=''">
+			 AND m.nickname like CONCAT(CONCAT('%', #{nickname}), '%')
+		</if>
+		<if test="couponTypeId != null">
+			 AND c.couponTypeId = #{couponTypeId}
+		</if>
+        <if test="memberId != null">
+            AND c.memberId = #{memberId}
+        </if>
+        <if test="status != null">
+            AND c.status = #{status}
+        </if>
+        <if test="scene != null">
+            AND c.scene = #{scene}
+        </if>
+        <if test="now != null">
+            AND c.validEndDate &gt;= #{now}
+        </if>
+		 order by c.createDate desc
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		SELECT COUNT(c.id)
+        FROM coupon c
+        join member m on c.memberId = m.id
+		left join sys_admin sa on c.sysAdminId = sa.id
+        where 1=1
+        <if test="nickname != null and nickname!=''">
+            AND m.nickname like CONCAT(CONCAT('%', #{nickname}), '%')
+        </if>
+        <if test="couponTypeId != null">
+            AND c.couponTypeId = #{couponTypeId}
+        </if>
+        <if test="memberId != null">
+            AND c.memberId = #{memberId}
+        </if>
+        <if test="sourceMemberId != null">
+            AND c.sourceMemberId = #{sourceMemberId}
+        </if>
+        <if test="status != null">
+            AND c.status = #{status}
+        </if>
+        <if test="now != null">
+            AND c.validEndDate &gt;= #{now}
+        </if>
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Coupon" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM coupon
+	</select>
+
+	<select id="findListByParams" resultType="java.util.Map" >
+        SELECT
+        c.*,m.nickname,m.avatarUrl
+        FROM coupon c
+        join member m on c.memberId = m.id
+        where 1=1
+        <if test="couponTypeId != null">
+            AND c.couponTypeId = #{couponTypeId}
+        </if>
+        <if test="memberId != null">
+            AND c.memberId = #{memberId}
+        </if>
+        <if test="status != null">
+            AND c.status = #{status}
+        </if>
+        <if test="now != null">
+            AND c.validEndDate &gt;= #{now}
+        </if>
+        order by c.createDate desc
+	</select>
+
+    <select id="findListByCart" resultType="com.zhengbangnet.modules.entity.Coupon" >
+        select * from coupon cp
+        where 1=1
+        and cp.memberId = #{memberId}
+        and cp.validStartDate &lt;= #{now}
+        and cp.validEndDate &gt;= #{now}
+        and cp.`status` = 0
+        AND
+            CASE cp.useType
+            WHEN 1 THEN
+                CASE cp.useScope
+                WHEN 1 THEN
+                  1=1
+                WHEN 2 THEN
+                  EXISTS (
+                    select ci.* from cart_item ci
+                    join cart c on ci.cartId = c.id
+                    where c.memberId = #{memberId}
+                    and ci.productId in (
+                        select ctp.productId from coupon_type_product ctp where 1=1
+                        AND ctp.couponTypeId = cp.couponTypeId
+                    )
+                  )
+            END
+            WHEN 2 THEN
+                CASE cp.useScope
+                WHEN 1 THEN
+                    (
+                    select sum(ps.price*ci.quantity) from cart_item ci
+                    join cart c on ci.cartId = c.id
+                    join product_stock ps on ps.id = ci.productStockId
+                    where c.memberId = #{memberId}
+                    ) >= cp.byFull
+                WHEN 2 THEN
+                    (
+                        select sum(ps.price*ci.quantity) from cart_item ci
+                        join cart c on ci.cartId = c.id
+                        join product_stock ps on ps.id = ci.productStockId
+                        where c.memberId = #{memberId}
+                        and ci.productId in (
+                            select ctp.productId from coupon_type_product ctp where 1=1
+                            AND ctp.couponTypeId = cp.couponTypeId
+                        )
+                    ) >= cp.byFull
+                END
+            END
+        order by cp.cutMoney desc
+    </select>
+
+	<select id="checkCoupon" resultType="java.lang.Integer" >
+		  select 1 from coupon cp
+			where cp.id = #{couponId}
+			AND
+			CASE cp.useType
+			WHEN 1 THEN
+				CASE cp.useScope
+				WHEN 1 THEN
+					1=1
+				WHEN 2 THEN
+					 EXISTS (
+						select ci.* from cart_item ci
+						join cart c on ci.cartId = c.id
+						where c.memberId = cp.memberId
+						and ci.productId in (
+							select ctp.productId from coupon_type_product ctp where 1=1
+							AND ctp.couponTypeId = cp.couponTypeId
+						)
+					)
+				END
+			WHEN 2 THEN
+				CASE cp.useScope
+				WHEN 1 THEN
+					(
+						select sum(ps.price*ci.quantity) from cart_item ci
+						join cart c on ci.cartId = c.id
+						join product_stock ps on ps.id = ci.productStockId
+						where c.memberId = cp.memberId
+					) >= cp.byFull
+				WHEN 2 THEN
+					(
+						select sum(ps.price*ci.quantity) from cart_item ci
+						join cart c on ci.cartId = c.id
+						join product_stock ps on ps.id = ci.productStockId
+						where c.memberId = cp.memberId
+						and ci.productId in (
+							select ctp.productId from coupon_type_product ctp where 1=1
+							AND ctp.couponTypeId = cp.couponTypeId
+						)
+					) >= cp.byFull
+				END
+			END
+	</select>
+
+	<select id="returnCouponByOrdersId" resultType="com.zhengbangnet.modules.entity.Coupon" >
+		update coupon set status = 0 where ordersId = #{ordersId} and status = 1
+	</select>
+
+</mapper>

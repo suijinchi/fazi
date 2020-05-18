@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.RechargeOrderMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, sn, amount, status, benefitAmount, payDate,
+		 paySn, memberId, payMethodId, giveAmount, type, taxRatio,agentId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.RechargeOrder" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM recharge_order
+		WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM recharge_order
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.RechargeOrder">
+		INSERT INTO recharge_order
+		(createDate,modifyDate,sn,amount,status,benefitAmount,payDate,paySn,memberId,payMethodId,giveAmount,type,taxRatio,agentId)
+		VALUES
+		(#{createDate},#{modifyDate},#{sn},#{amount},#{status},#{benefitAmount},#{payDate},#{paySn},#{memberId},#{payMethodId},#{giveAmount},#{type},#{taxRatio},#{agentId})
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.RechargeOrder">
+		INSERT INTO recharge_order
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				createDate,
+			</if>
+			<if test="modifyDate != null">
+				modifyDate,
+			</if>
+			<if test="sn != null">
+				sn,
+			</if>
+			<if test="amount != null">
+				amount,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="benefitAmount != null">
+				benefitAmount,
+			</if>
+			<if test="payDate != null">
+				payDate,
+			</if>
+			<if test="paySn != null">
+				paySn,
+			</if>
+			<if test="memberId != null">
+				memberId,
+			</if>
+			<if test="payMethodId != null">
+				payMethodId,
+			</if>
+			<if test="giveAmount != null">
+				giveAmount,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="taxRatio != null">
+				taxRatio,
+			</if>
+			<if test="agentId != null">
+				agentId,
+			</if>
+
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				#{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				#{modifyDate},
+			</if>
+			<if test="sn!=null">
+				#{sn},
+			</if>
+			<if test="amount!=null">
+				#{amount},
+			</if>
+			<if test="status!=null">
+				#{status},
+			</if>
+			<if test="benefitAmount!=null">
+				#{benefitAmount},
+			</if>
+			<if test="payDate!=null">
+				#{payDate},
+			</if>
+			<if test="paySn!=null">
+				#{paySn},
+			</if>
+			<if test="memberId!=null">
+				#{memberId},
+			</if>
+			<if test="payMethodId!=null">
+				#{payMethodId},
+			</if>
+			<if test="giveAmount!=null">
+				#{giveAmount},
+			</if>
+			<if test="type!=null">
+				#{type},
+			</if>
+			<if test="taxRatio!=null">
+				#{taxRatio},
+			</if>
+			<if test="agentId !=null">
+				#{agentId},
+			</if>
+		</trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.RechargeOrder">
+		UPDATE recharge_order
+		<set>
+			<if test="modifyDate != null">
+				modifyDate = #{modifyDate},
+			</if>
+			<if test="sn != null">
+				sn = #{sn},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="benefitAmount != null">
+				benefitAmount = #{benefitAmount},
+			</if>
+			<if test="payDate != null">
+				payDate = #{payDate},
+			</if>
+			<if test="paySn != null">
+				paySn = #{paySn},
+			</if>
+			<if test="memberId != null">
+				memberId = #{memberId},
+			</if>
+			<if test="payMethodId != null">
+				payMethodId = #{payMethodId},
+			</if>
+			<if test="giveAmount != null">
+				giveAmount = #{giveAmount},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="taxRatio != null">
+				taxRatio = #{taxRatio},
+			</if>
+			<if test="agentId != null">
+				agentId = #{agentId},
+			</if>
+
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.RechargeOrder">
+		 UPDATE recharge_order
+		 SET 
+			 modifyDate = #{modifyDate},
+			 sn = #{sn},
+			 amount = #{amount},
+			 status = #{status},
+			 benefitAmount = #{benefitAmount},
+			 payDate = #{payDate},
+			 paySn = #{paySn},
+			 memberId = #{memberId},
+			 payMethodId = #{payMethodId},
+			 giveAmount = #{giveAmount},
+			 type = #{type},
+			 taxRatio = #{taxRatio},
+			 agentId = #{agentId}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		SELECT ro.*,
+		m.name,m.mobile,m.nickname,m.balance,m.historyBalance,m.avatarUrl,m.type memberType,
+		a.name agentName
+		FROM recharge_order ro
+		JOIN member m ON m.id = ro.memberId
+		left join agent a on a.id = ro.agentId
+		WHERE 1=1
+		<if test="status!=null and status!=''">
+			and ro.status = #{status}
+		</if>
+		<if test="memberId!=null">
+			and m.id = #{memberId}
+		</if>
+		<if test="nickname!=null and nickname!=''">
+			and m.nickname like CONCAT('%',#{nickname},'%')
+		</if>
+		<if test="startDate!=null and startDate!=''">
+			and ro.payDate &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			and ro.payDate &lt;= #{endDate}
+		</if>
+		<if test="type!=null">
+			and ro.type = #{type}
+		</if>
+		<if test="agentId!=null">
+			and ro.agentId = #{agentId}
+		</if>
+		order by ro.createDate desc
+		LIMIT #{pageable.firstResult},#{pageable.pageSize}
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		SELECT COUNT(ro.id)
+		FROM recharge_order ro
+		JOIN member m ON m.id = ro.memberId
+		WHERE 1=1
+		<if test="status!=null and status!=''">
+			and ro.status = #{status}
+		</if>
+		<if test="memberId!=null">
+			and m.id = #{memberId}
+		</if>
+		<if test="type!=null">
+			and m.type = #{type}
+		</if>
+		<if test="nickname!=null and nickname!=''">
+			and m.nickname like CONCAT('%',#{nickname},'%')
+		</if>
+		<if test="startDate!=null and startDate!=''">
+			and ro.payDate &gt;= #{startDate}
+		</if>
+		<if test="endDate!=null and endDate!=''">
+			and ro.payDate &lt;= #{endDate}
+		</if>
+		<if test="agentId!=null">
+			and ro.agentId = #{agentId}
+		</if>
+	</select>
+
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.RechargeOrder" >
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM recharge_order
+	</select>
+
+</mapper>

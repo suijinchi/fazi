@@ -1,0 +1,231 @@
+/** 
+	public.css
+	<jjyWeiCard>
+	Created by liwei on 2017-10-09.
+	Copyright 2017 liwei. All rights reserved.
+**/
+
+.reg-main {
+	padding: 0 2%;
+}
+
+.reg-main .reg-box {
+	background: #fff;
+	margin: 0 auto;
+}
+
+.reg-main .reg-box .reg-item {
+	width: 100%;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	height: 60px;
+	line-height: 60px;
+}
+
+.reg-main .reg-box .reg-item .reg-icon {
+	width: 45px;
+	height: 45px;
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.reg-main .reg-box .reg-item .reg-icon img {
+	width: 45px;
+	margin-top: 7.5px;
+}
+
+.reg-main .reg-box .reg-item .reg-rbox {
+	border-bottom: 1px solid #ededed;
+	flex: 1;
+	-ms-flex: 1;
+	-webkit-flex: 1;
+	-moz-box-flex: 1;
+}
+
+.reg-main .reg-box .reg-item .reg-rbox input.inp-large {
+	width: 100%;
+	border: 0;
+	height: 34px;
+	line-height: 34px;
+}
+
+.btn-huoqu {
+	border: 1px solid #5bc3d4;
+	padding: 0% 14%;
+	line-height: 40px;
+	margin-top: 10px;
+	margin-right: 2%;
+	color: #5bc3d4;
+	float: right;
+	border-radius: 3px;
+}
+
+.btn-huoqu-gray {
+	padding: 0% 10%;
+	line-height: 40px;
+	margin-top: 10px;
+	margin-right: 2%;
+	color: #fff;
+	float: right;
+	border-radius: 3px;
+	background: #ededed;
+}
+
+.reg-rbox .label {
+	display: -moz-inline-block;
+	display: inline-block;
+	cursor: pointer;
+	padding-left: 25px;
+	line-height: 30px;
+	font-size: 1em;
+	color: #4d4d4d;
+	margin-right: 20px;
+	background: url(../images/check1_07.png) no-repeat left center;
+	background-size: 50% auto;
+}
+
+.label_checked {
+	display: -moz-inline-block;
+	display: inline-block;
+	cursor: pointer;
+	padding-left: 25px;
+	line-height: 30px;
+	font-size: 1em;
+	color: #000;
+	margin-right: 20px;
+	background: url(../images/check2_09.png) no-repeat left center;
+	background-size: 50% auto;
+}
+
+#radio_id_1,
+#radio_id_2,
+#radio_id_3,
+#radio_id_4 {
+	display: none;
+}
+
+.item-reg-submit {
+	margin: 5% 5%;
+}
+
+.item-reg-submit .forget {
+	color: #999999;
+	float: right;
+	font-size: 13px;
+	line-height: 40px;
+}
+
+.memberCenter-box {
+	padding: 2%;
+	color: #4c4c4c;
+}
+
+.memberCenter-box .content {
+	padding: 0 3%;
+}
+
+.memberCenter-box h4 {
+	line-height: 40px;
+}
+
+.card-box {
+	width: 100%;
+	/*background: url(../images/card-bg_03.jpg) center top no-repeat;*/
+	/*background-size:100% auto;*/
+}
+
+.zong-bg {
+	width: 100%;
+}
+
+.jjy-card-box {
+	position: absolute;
+	top: 20px;
+	left: 0;
+	width: 100%;
+}
+
+.jjy-card-box .cImg {
+	width: 80%;
+	margin: 0 auto;
+	display: block;
+}
+
+.jjy-card-box p {
+	position: absolute;
+	bottom: 8px;
+	left: 15%;
+	color: #ffffff;
+	font-size: 12px;
+}
+.jifen-box {
+	height: 40px;
+	line-height: 40px;
+	width: 90%;
+	border: 1px solid #ececec;
+	margin: 0 auto;
+	margin-top: 40%;
+	background: #fff;
+	border-radius: 5px;
+}
+
+.jifen-box ul li{
+	float: left;
+	width: 50%;
+	text-align: center;
+	position: relative;
+}
+
+.jifen-box ul li:after{
+	content: '';
+	position: absolute;
+	right: 0;
+	display: block;
+	top: 4px;
+	height: 30px;
+	border-right: 1px dotted #d2d2d2;
+}
+
+.jifen-box ul li:last-child:after{
+	border-right: 0;
+}
+.popLayer{
+	width: 100%;
+	background: #FFFFFF;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+.popLayer h3{
+	font-weight: normal;
+	font-size: 18px;
+}
+.popLayer img{
+	width: 94%;
+	display: block;
+	margin: 0 auto;
+}
+.popLayer span{
+	font-size: 12px;
+	color: #8c8c8c;
+}
+.agreementBox{
+	padding: 0 3%;
+	color: #353535;
+	font-size: 14px;
+}
+.agreementBox .atitle{
+	line-height: 40px;
+	font-size: 16px;
+	color: #1e1e1e;
+	border-bottom: 1px solid #7f7f7f;
+}
+.agreementBox .itemAgreement h2{
+	font-size: 15px;
+	color: #000000;
+	line-height: 36px;
+}
+.agreementBox .itemAgreement  span{
+	color: #ff0000;
+}

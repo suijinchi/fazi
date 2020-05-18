@@ -1,0 +1,159 @@
+/* 
+ 2018-3-12 quan 券列表
+ * */
+
+.min-width {
+	min-width: 320px;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.box-park-quan {
+	width: 94%;
+	margin: 0 auto;
+	color: #7f7f7f;
+}
+
+.quan-blocks {
+	width: 100%;
+	height: 100px;
+	overflow: hidden;
+	margin-top: 1em;
+	border-radius: 8px;
+}
+
+.box-park-quan .current {
+	background: url(../images/right.png) right top no-repeat;
+	background-size: 25px auto;
+}
+
+.box-park-quan .item-quan-block {
+	width: 100%;
+	height: 100px;
+	background: #fff;
+	box-shadow: 2px 2px 3px #e2e2e2;
+}
+
+.box-park-quan .item-quan-block .left {
+	width: 30%;
+	padding-left: 5%;
+	float: left;
+	height: 100px;
+	text-align: center;
+	color: #727272;
+	font-size: 0.9em;
+	background: url(../images/quan_03.png) left 0 repeat-y;
+	background-size: 20px auto;
+}
+
+.box-park-quan .item-quan-block .left h3 {
+	color: #ff4442;
+	margin-top: 0.5em;
+	font-size: 1.8em;
+}
+
+.box-park-quan .item-quan-block .left h3 span {
+	font-size: 0.8em;
+}
+
+.box-park-quan .item-quan-block .right {
+	width: 65%;
+	float: left;
+	height: 100px;
+	text-align: center;
+	display: flex;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+}
+
+.box-park-quan .item-quan-block .right .q-img {
+	width: 19px;
+	height: 100px;
+	background: url(../images/quan-bg_03.jpg) left top repeat-y;
+	background-size: 18.2px auto;
+	margin-top: 2px;
+	position: relative;
+}
+
+.box-park-quan .item-quan-block .right .q-img:after {
+	position: absolute;
+	content: '';
+	display: block;
+	width: 17px;
+	height: 2px;
+	left: 1px;
+	top: -2px;
+	background: #ececec;
+}
+
+.box-park-quan .item-quan-block .right .q-message {
+	flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	height: 100px;
+}
+
+.box-park-quan .item-quan-block .right h4 {
+	color: #ff4442;
+	margin-top: 0.8em;
+	font-size: 1em;
+	font-weight: normal;
+}
+
+.box-park-quan .item-quan-block .right .quan-p {
+	font-size: 0.8em;
+}
+
+.box-park-quan .item-quan-block .right .quan-time {
+	font-size: 0.7em;
+}
+
+.p-lingqu-quan {
+
+}
+
+
+.p-lingqu-quan .item-rulesList {
+	padding: 0 20px;
+	color: #181818;
+	font-size: 0.9em;
+	margin-bottom: 8px;
+}
+
+.p-lingqu-quan .rule-words {
+	flex: 1;
+	;
+}
+
+.p-lingqu-quan .rule-index {
+	width: 40px;
+}
+
+.p-lingqu-quan span {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	border-radius: 50%;
+	color: #ffffff;
+	font-size: 12px;
+	background: #d8c41b;
+	display: block;
+}
+
+.item-rulesList {
+	display: flex;
+}
+.p-lingqu-quan .btn-ljlq{
+	width: 40%;
+	height: 40px;
+	line-height: 40px;
+	background: #ffda31;
+	color: #950000;
+	text-align: center;
+	display: block;
+	margin: 0 auto;
+	border-radius: 1px;
+	margin-top: 5%;
+	box-shadow: 2px 2px 3px #e7742d;
+}

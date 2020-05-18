@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.PointExpMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, expDate, amount, unuseAmount, memberId, memo
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.PointExp" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM point_exp
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM point_exp
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.PointExp">
+		 INSERT INTO point_exp
+ 		(createDate,modifyDate,expDate,amount,unuseAmount,memberId,memo) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{expDate},#{amount},#{unuseAmount},#{memberId},#{memo})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.PointExp">
+		 INSERT INTO point_exp
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="expDate != null">
+				 expDate,
+			</if>
+			<if test="amount != null">
+				 amount,
+			</if>
+			<if test="unuseAmount != null">
+				 unuseAmount,
+			</if>
+			<if test="memberId != null">
+				 memberId,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="expDate!=null">
+				 #{expDate},
+			</if>
+			<if test="amount!=null">
+				 #{amount},
+			</if>
+			<if test="unuseAmount!=null">
+				 #{unuseAmount},
+			</if>
+			<if test="memberId!=null">
+				 #{memberId},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.PointExp">
+		 UPDATE point_exp
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="expDate != null">
+				 expDate = #{expDate},
+			</if>
+			<if test="amount != null">
+				 amount = #{amount},
+			</if>
+			<if test="unuseAmount != null">
+				 unuseAmount = #{unuseAmount},
+			</if>
+			<if test="memberId != null">
+				 memberId = #{memberId},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.PointExp">
+		 UPDATE point_exp
+		 SET 
+			 modifyDate = #{modifyDate},
+			 expDate = #{expDate},
+			 amount = #{amount},
+			 unuseAmount = #{unuseAmount},
+			 memberId = #{memberId},
+			 memo = #{memo}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM point_exp
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND point_exp.id = #{id} 
+			</if>
+ --> 
+		 order by point_exp.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM point_exp
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND point_exp.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.PointExp" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM point_exp
+	</select>
+
+</mapper>

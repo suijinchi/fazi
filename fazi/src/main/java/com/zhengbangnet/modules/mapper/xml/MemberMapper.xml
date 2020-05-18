@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.MemberMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, nickname, gender, point, historyPoint, status, avatarUrl, openid, type, balance,
+		historyBalance, qrCodeUrl, memberNo, name, mobile, birthday,memberRankId,recommendId,recommendId2,recommendId3,treePath,
+		birthdayYear,birthdayMonth,birthdayDay,signSerialTimes
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Member" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM member
+		WHERE id = #{id}
+	</select>
+
+	<select id="getByOpenid" resultType="com.zhengbangnet.modules.entity.Member" parameterType="java.lang.String">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM member
+		WHERE openid = #{openid}
+	</select>
+
+	<select id="getOtherByOpenidAndId" resultType="com.zhengbangnet.modules.entity.Member">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM member
+		WHERE openid = #{openid}
+		AND id != #{id} limit 1
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM member
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Member">
+		INSERT INTO member
+		(createDate,modifyDate,nickname,gender,point,historyPoint,status,avatarUrl,
+		openid,type,balance,historyBalance,qrCodeUrl,memberNo,name,mobile,birthday,
+		memberRankId,recommendId,recommendId2,recommendId3,treePath,birthdayYear,birthdayMonth,birthdayDay,signSerialTimes)
+		VALUES
+		(#{createDate},#{modifyDate},#{nickname},#{gender},#{point},#{historyPoint},#{status},#{avatarUrl},
+		#{openid},#{type},#{balance},#{historyBalance},#{qrCodeUrl},#{memberNo},#{name},#{mobile},#{birthday},
+		#{memberRankId},#{recommendId},#{recommendId2},#{recommendId3},#{treePath},#{birthdayYear},#{birthdayMonth},#{birthdayDay},#{signSerialTimes})
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Member">
+		INSERT INTO member
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				createDate,
+			</if>
+			<if test="modifyDate != null">
+				modifyDate,
+			</if>
+			<if test="nickname != null">
+				nickname,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="point != null">
+				point,
+			</if>
+			<if test="historyPoint != null">
+				historyPoint,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="avatarUrl != null">
+				avatarUrl,
+			</if>
+			<if test="openid != null">
+				openid,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="balance != null">
+				balance,
+			</if>
+			<if test="historyBalance != null">
+				historyBalance,
+			</if>
+			<if test="qrCodeUrl != null">
+				qrCodeUrl,
+			</if>
+			<if test="memberNo != null">
+				memberNo,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="memberRankId != null">
+				memberRankId,
+			</if>
+			<if test="recommendId != null">
+				recommendId,
+			</if>
+			<if test="recommendId2 != null">
+				recommendId2,
+			</if>
+			<if test="recommendId3 != null">
+				recommendId3,
+			</if>
+			<if test="treePath != null">
+				treePath,
+			</if>
+
+			<if test="birthdayYear != null">
+				birthdayYear,
+			</if>
+			<if test="birthdayMonth != null">
+				birthdayMonth,
+			</if>
+			<if test="birthdayDay != null">
+				birthdayDay,
+			</if>
+			<if test="signSerialTimes != null">
+				signSerialTimes,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				#{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				#{modifyDate},
+			</if>
+			<if test="nickname!=null">
+				#{nickname},
+			</if>
+			<if test="gender!=null">
+				#{gender},
+			</if>
+			<if test="point!=null">
+				#{point},
+			</if>
+			<if test="historyPoint!=null">
+				#{historyPoint},
+			</if>
+			<if test="status!=null">
+				#{status},
+			</if>
+			<if test="avatarUrl!=null">
+				#{avatarUrl},
+			</if>
+			<if test="openid!=null">
+				#{openid},
+			</if>
+			<if test="type!=null">
+				#{type},
+			</if>
+			<if test="balance!=null">
+				#{balance},
+			</if>
+			<if test="historyBalance!=null">
+				#{historyBalance},
+			</if>
+			<if test="qrCodeUrl!=null">
+				#{qrCodeUrl},
+			</if>
+			<if test="memberNo!=null">
+				#{memberNo},
+			</if>
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="mobile!=null">
+				#{mobile},
+			</if>
+			<if test="birthday!=null">
+				#{birthday},
+			</if>
+			<if test="memberRankId!=null">
+				#{memberRankId},
+			</if>
+			<if test="recommendId !=null">
+				#{recommendId},
+			</if>
+			<if test="recommendId2 !=null">
+				#{recommendId2},
+			</if>
+			<if test="recommendId3 !=null">
+				#{recommendId3},
+			</if>
+			<if test="treePath !=null">
+				#{treePath},
+			</if>
+
+			<if test="birthdayYear !=null">
+				#{birthdayYear},
+			</if>
+			<if test="birthdayMonth !=null">
+				#{birthdayMonth},
+			</if>
+			<if test="birthdayDay !=null">
+				#{birthdayDay},
+			</if>
+			<if test="signSerialTimes !=null">
+				#{signSerialTimes},
+			</if>
+
+		</trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Member">
+		UPDATE member
+		<set>
+			<if test="modifyDate != null">
+				modifyDate = #{modifyDate},
+			</if>
+			<if test="nickname != null">
+				nickname = #{nickname},
+			</if>
+			<if test="gender != null">
+				gender = #{gender},
+			</if>
+			<if test="point != null">
+				point = #{point},
+			</if>
+			<if test="historyPoint != null">
+				historyPoint = #{historyPoint},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="avatarUrl != null">
+				avatarUrl = #{avatarUrl},
+			</if>
+			<if test="openid != null">
+				openid = #{openid},
+			</if>
+			<if test="type != null">
+				type = #{type},
+			</if>
+			<if test="balance != null">
+				balance = #{balance},
+			</if>
+			<if test="historyBalance != null">
+				historyBalance = #{historyBalance},
+			</if>
+			<if test="qrCodeUrl != null">
+				qrCodeUrl = #{qrCodeUrl},
+			</if>
+			<if test="memberNo != null">
+				memberNo = #{memberNo},
+			</if>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday},
+			</if>
+			<if test="memberRankId != null">
+				memberRankId = #{memberRankId},
+			</if>
+			<if test="recommendId != null">
+				recommendId = #{recommendId},
+			</if>
+			<if test="recommendId2 != null">
+				recommendId2 = #{recommendId2},
+			</if>
+			<if test="recommendId3 != null">
+				recommendId3 = #{recommendId3},
+			</if>
+			<if test="treePath != null">
+				treePath = #{treePath},
+			</if>
+
+			<if test="birthdayYear != null">
+				birthdayYear = #{birthdayYear},
+			</if>
+			<if test="birthdayMonth != null">
+				birthdayMonth = #{birthdayMonth},
+			</if>
+			<if test="birthdayDay != null">
+				birthdayDay = #{birthdayDay},
+			</if>
+			<if test="signSerialTimes != null">
+				signSerialTimes = #{signSerialTimes},
+			</if>
+
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Member">
+		 UPDATE member
+		 SET
+			 modifyDate = #{modifyDate},
+			 nickname = #{nickname},
+			 gender = #{gender},
+			 point = #{point},
+			 historyPoint = #{historyPoint},
+			 status = #{status},
+			 avatarUrl = #{avatarUrl},
+			 openid = #{openid},
+			 type = #{type},
+			 balance = #{balance},
+			 historyBalance = #{historyBalance},
+			 qrCodeUrl = #{qrCodeUrl},
+			 memberNo = #{memberNo},
+			 name = #{name},
+			 mobile = #{mobile},
+			 birthday = #{birthday},
+			 recommendId = #{recommendId},
+			 recommendId2 = #{recommendId2},
+			 recommendId3 = #{recommendId3},
+			 treePath = #{treePath},
+			 memberRankId = #{memberRankId},
+
+			 birthdayYear = #{birthdayYear},
+			 birthdayMonth = #{birthdayMonth},
+			 birthdayDay = #{birthdayDay},
+			 signSerialTimes = #{signSerialTimes}
+
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		SELECT
+			m.*,
+			mr.name memberRankName,
+			DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s') as cjrq,
+			(select mm.nickname from member mm where mm.id = m.recommendId) recommendNickname,
+			(select mm.name from member mm where mm.id = m.recommendId) recommendName
+		FROM member m join member_rank mr on m.memberRankId = mr.id
+		where 1=1
+			<if test="begRq!=null">
+				AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&gt;=#{begRq}
+			</if>
+			<if test="endRq!=null">
+				AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&lt;=#{endRq}
+			</if>
+			<if test="type!=null">
+				AND m.type=#{type}
+			</if>
+			<if test="memberRankId !=null">
+				AND m.memberRankId=#{memberRankId}
+			</if>
+			<if test="status!=null">
+				and m.status=#{status}
+			</if>
+			<if test="nickname !=null and nickname!=''">
+ 				and m.nickname like CONCAT(CONCAT('%', #{nickname}), '%')
+			</if>
+			<if test="mobile !=null and mobile!=''">
+ 				and m.mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+			</if>
+			<if test="historyBalanceLow !=null">
+ 				and m.historyBalance &gt;= #{historyBalanceLow}
+			</if>
+			<if test="historyBalacneHigh !=null">
+				and m.historyBalance &lt;= #{historyBalacneHigh}
+			</if>
+
+			<if test="productId !=null">
+				and EXISTS
+				(
+					select 1 from orders o
+					join orders_item oi on o.id = oi.ordersId
+					where o.memberid = m.id
+					and oi.productId = #{productId}
+				)
+			</if>
+
+            <if test="monthStart !=null and monthStart!='' and monthEnd!=null and monthEnd!='' and dayStart!=null and dayStart!='' and dayEnd!=null and dayEnd!=''">
+                <if test="monthStart gt monthEnd">
+                    and(
+                        (
+                            m.birthdayMonth &gt;= #{monthStart}
+                            AND CASE
+                            WHEN m.birthdayMonth = #{monthStart}
+                            THEN m.birthdayDay &gt;= #{dayStart}
+							ELSE  1=1
+                            END
+                        )
+                        or
+                        (
+                            m.birthdayMonth &lt;= #{monthEnd}
+                            AND CASE
+                            WHEN m.birthdayMonth = #{monthEnd}
+                            THEN m.birthdayDay &lt;= #{dayEnd}
+							ELSE  1=1
+                            END
+                        )
+                    )
+                </if>
+                <if test="monthStart lte monthEnd">
+                    and(
+                        (
+                            m.birthdayMonth &gt;= #{monthStart}
+                            AND CASE
+                            WHEN m.birthdayMonth = #{monthStart}
+                            THEN m.birthdayDay &gt;= #{dayStart}
+							ELSE  1=1
+                            END
+                        )
+                        AND
+                        (
+                            m.birthdayMonth &lt;= #{monthEnd}
+                            AND CASE
+                            WHEN m.birthdayMonth = #{monthEnd}
+                            THEN m.birthdayDay &lt;= #{dayEnd}
+							ELSE  1=1
+                            END
+                        )
+                    )
+                </if>
+            </if>
+		 order by m.createDate desc
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		SELECT COUNT(m.id) FROM member m
+		where 1=1
+			<if test="begRq!=null">
+				AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&gt;=#{begRq}
+			</if>
+			<if test="endRq!=null">
+				AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&lt;=#{endRq}
+			</if>
+			<if test="memberRankId !=null">
+				AND m.memberRankId = #{memberRankId}
+			</if>
+			<if test="type!=null">
+				AND m.type=#{type}
+			</if>
+			<if test="status!=null">
+				and m.status=#{status}
+			</if>
+			<if test="nickname !=null and nickname!=''">
+				and m.nickname like CONCAT(CONCAT('%', #{nickname}), '%')
+			</if>
+			<if test="mobile !=null and mobile!=''">
+				and m.mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+			</if>
+			<if test="historyBalanceLow !=null">
+				and m.historyBalance &gt;= #{historyBalanceLow}
+			</if>
+			<if test="historyBalacneHigh !=null">
+				and m.historyBalance &lt;= #{historyBalacneHigh}
+			</if>
+			<if test="productId !=null">
+				and EXISTS
+				(
+					select 1 from orders o
+					join orders_item oi on o.id = oi.ordersId
+					where o.memberid = m.id
+					and oi.productId = #{productId}
+				)
+			</if>
+			<if test="monthStart !=null and monthStart!='' and monthEnd!=null and monthEnd!='' and dayStart!=null and dayStart!='' and dayEnd!=null and dayEnd!=''">
+				<if test="monthStart gt monthEnd">
+					and(
+					(
+						m.birthdayMonth &gt;= #{monthStart}
+						<if test="monthStart == currentMonth">
+							AND m.birthdayDay &gt;= #{dayStart}
+						</if>
+						)
+						OR
+						(
+						m.birthdayMonth &lt;= #{monthEnd}
+						<if test="monthEnd == currentMonth">
+							AND m.birthdayDay &lt;= #{dayEnd}
+						</if>
+						)
+					)
+				</if>
+				<if test="monthStart lte monthEnd">
+					and(
+						(
+						m.birthdayMonth &gt;= #{monthStart}
+						<if test="monthStart == currentMonth">
+							AND m.birthdayDay &gt;= #{dayStart}
+						</if>
+						)
+						AND
+						(
+						m.birthdayMonth &lt;= #{monthEnd}
+						<if test="monthEnd == currentMonth">
+							AND m.birthdayDay &lt;= #{dayEnd}
+						</if>
+						)
+					)
+				</if>
+			</if>
+	</select>
+
+	<!-- 根据条件查询会员数量 -->
+	<select id="findCountsByParams" resultType="java.lang.Long">
+		SELECT count(*)
+		FROM member
+		WHERE 1 = 1
+		<if test="startTime != null and startTime!=''">
+			and createDate &gt;= #{startTime}
+		</if>
+		<if test="endTime != null and endTime!=''">
+			and createDate &lt;= #{endTime}
+		</if>
+
+	</select>
+	
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Member" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM member
+	</select>
+
+
+	<select id="findListByParams" resultType="java.util.Map">
+		SELECT 
+		 m.*,mr.name memberRankName,
+		 DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s') as cjrq
+		FROM member m join member_rank mr on m.memberRankId = mr.id
+  		where 1=1
+        <if test="begRq!=null">
+            AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&gt;=#{begRq}
+        </if>
+        <if test="endRq!=null">
+            AND DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s')&lt;=#{endRq}
+        </if>
+        <if test="nickname !=null and nickname!=''">
+            and m.nickname like CONCAT(CONCAT('%', #{m.nickname}), '%')
+        </if>
+        <if test="type!=null">
+            AND m.type=#{type}
+        </if>
+        <if test="status!=null">
+            and m.status=#{status}
+        </if>
+        <if test="productId !=null">
+            and EXISTS
+            (
+                select 1 from orders o
+                join orders_item oi on o.id = oi.ordersId
+                where o.memberid = m.id
+                and oi.productId = #{productId}
+            )
+        </if>
+        <if test="memberRankId !=null">
+            AND m.memberRankId = #{memberRankId}
+        </if>
+        <if test="mobile !=null and mobile!=''">
+            and m.mobile like CONCAT(CONCAT('%', #{mobile}), '%')
+        </if>
+        <if test="historyBalanceLow !=null">
+            and m.historyBalance &gt;= #{historyBalanceLow}
+        </if>
+        <if test="historyBalacneHigh !=null">
+            and m.historyBalance &lt;= #{historyBalacneHigh}
+        </if>
+        <if test="monthStart !=null and monthStart!='' and monthEnd!=null and monthEnd!='' and dayStart!=null and dayStart!='' and dayEnd!=null and dayEnd!=''">
+            <if test="monthStart gt monthEnd">
+                and(
+                (
+                m.birthdayMonth &gt;= #{monthStart}
+                <if test="monthStart == currentMonth">
+                    AND m.birthdayDay &gt;= #{dayStart}
+                </if>
+                )
+                OR
+                (
+                m.birthdayMonth &lt;= #{monthEnd}
+                <if test="monthEnd == currentMonth">
+                    AND m.birthdayDay &lt;= #{dayEnd}
+                </if>
+                )
+                )
+            </if>
+            <if test="monthStart lte monthEnd">
+                and(
+                (
+                m.birthdayMonth &gt;= #{monthStart}
+                <if test="monthStart == currentMonth">
+                    AND m.birthdayDay &gt;= #{dayStart}
+                </if>
+                )
+                AND
+                (
+                m.birthdayMonth &lt;= #{monthEnd}
+                <if test="monthEnd == currentMonth">
+                    AND m.birthdayDay &lt;= #{dayEnd}
+                </if>
+                )
+                )
+            </if>
+        </if>
+		 order by m.createDate desc
+	</select>
+
+
+	<select id="findListByIds" resultType="java.util.Map">
+		SELECT
+		 m.*,mr.name memberRankName,
+		 DATE_FORMAT(m.createDate,'%Y-%m-%d %H:%i:%s') as cjrq
+		FROM member m join member_rank mr on m.memberRankId = mr.id
+  		where m.id in
+  		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+			#{id}
+		</foreach>
+		order by m.createDate desc
+	</select>
+
+	<select id="findByOpenid" resultType="com.zhengbangnet.modules.entity.Member" parameterType="java.lang.String">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM member
+		 WHERE openid = #{openid}
+	</select>
+
+	<!-- 依据会员ID查询积分明细 每页10条 -->
+	<select id="queryPointByMemberId" resultType="java.util.Map">
+		select DATE_FORMAT(createDate,'%Y-%m-%d %H:%i:%s') as createDate,point,ifnull(memo,'') as memo
+		from point_record 
+		where memberId=#{memberid} order by createDate desc limit #{first},#{pageSize}
+	</select>
+
+	<!-- 依据订单状态查询订单数量 -->
+	<select id="countByOrdersStatus" resultType="java.lang.Integer">
+		select count(1) as cnt from orders 
+		<where>
+		memberId=#{memberId}
+		<if test="ordersStatus!=null">
+		and ordersStatus=#{ordersStatus}
+		</if>
+		<if test="shippingStatus!=null">
+		and shippingStatus=#{shippingStatus}
+		</if>
+		<if test="payStatus!=null">
+		and payStatus=#{payStatus}
+		</if>
+		<if test="assessStatus!=null">
+		and assessStatus=#{assessStatus}
+		</if>
+		</where>
+	</select>
+
+	<select id="getByMobile" resultType="com.zhengbangnet.modules.entity.Member" >
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM member m
+		WHERE 1=1
+		AND m.mobile = #{mobile}
+	</select>
+	<!-- 分页查询-->
+	<select id="findTeamPage" resultType="java.util.HashMap">
+		SELECT m.*,(select name from member_rank mr where mr.id = m.memberRankId) memberRankName
+		FROM member m
+		where 1=1
+		<choose>
+			<when test="level==0">
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test="level==1">
+				AND m.recommendId = #{recommendId}
+			</when>
+
+			<when test='level==2 and tp!=","'>
+				AND LENGTH(REPLACE(m.treePath ,#{tp}, ''))-LENGTH(REPLACE(REPLACE(m.treePath, #{tp}, ''),',','')) = 2
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test='level==2 and tp==","'>
+				AND (LENGTH(m.treePath)-LENGTH(REPLACE(m.treePath, ',', ''))) = 3
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+
+			<when test='level==3 and tp!=","'>
+				AND LENGTH(REPLACE(m.treePath ,#{tp}, ''))-LENGTH(REPLACE(REPLACE(m.treePath, #{tp}, ''),',','')) = 3
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test='level==3 and tp==","'>
+				AND (LENGTH(m.treePath)-LENGTH(REPLACE(m.treePath, ',', ''))) = 4
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<otherwise>
+				AND m.recommendId = #{recommendId}
+			</otherwise>
+		</choose>
+		order by m.createDate desc
+		LIMIT #{pageable.firstResult},#{pageable.pageSize}
+	</select>
+	<select id="getTeamCount" resultType="java.lang.Long" >
+		SELECT COUNT(id) FROM member m WHERE 1=1
+		<choose>
+			<when test="level==0">
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test="level==1">
+				AND m.recommendId = #{recommendId}
+			</when>
+			<when test='level==2 and tp!=","'>
+				AND LENGTH(REPLACE(m.treePath ,#{tp}, ''))-LENGTH(REPLACE(REPLACE(m.treePath, #{tp}, ''),',','')) = 2
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test='level==2 and tp==","'>
+				AND (LENGTH(m.treePath)-LENGTH(REPLACE(m.treePath, ',', ''))) = 3
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+
+			<when test='level==3 and tp!=","'>
+				AND LENGTH(REPLACE(m.treePath ,#{tp}, ''))-LENGTH(REPLACE(REPLACE(m.treePath, #{tp}, ''),',','')) = 3
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<when test='level==3 and tp==","'>
+				AND (LENGTH(m.treePath)-LENGTH(REPLACE(m.treePath, ',', ''))) = 4
+				AND m.treePath like "%,"#{recommendId}",%"
+			</when>
+			<otherwise>
+				AND m.recommendId = #{recommendId}
+			</otherwise>
+		</choose>
+	</select>
+</mapper>

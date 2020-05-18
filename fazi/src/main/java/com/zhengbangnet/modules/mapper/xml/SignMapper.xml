@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.SignMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, memberId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Sign" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sign
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM sign
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Sign">
+		 INSERT INTO sign
+ 		(createDate,modifyDate,memberId) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{memberId})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Sign">
+		 INSERT INTO sign
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="memberId != null">
+				 memberId,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="memberId!=null">
+				 #{memberId},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Sign">
+		 UPDATE sign
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="memberId != null">
+				 memberId = #{memberId},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Sign">
+		 UPDATE sign
+		 SET 
+			 modifyDate = #{modifyDate},
+			 memberId = #{memberId}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		  s.id,s.createDate,m.nickname, m.gender, m.avatarUrl, m.name, m.mobile, m.signSerialTimes
+		 FROM sign s
+		join member m on m.id = s.memberId
+		 where 1=1 
+		<if test="date != null ">
+			AND DATE_FORMAT(s.createDate,'%Y-%m-%d') = #{date}
+		</if>
+		 order by s.id desc
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(s.id) FROM sign s
+		 WHERE 1=1
+		<if test="date != null ">
+			AND DATE_FORMAT(s.createDate,'%Y-%m-%d') = #{date}
+		</if>
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Sign" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sign
+	</select>
+
+	<select id="findDateByMember" resultType="java.util.Map">
+		select DATE_FORMAT(createDate,'%Y-%m-%d') as date
+			from sign
+		where 1=1
+		<if test="nowDate !=null and nowDate !=''">
+			and DATE_FORMAT(createDate,'%Y-%m-%d') = #{nowDate}
+		</if>
+		<if test="monthStartDate !=null and monthStartDate !=''">
+			and DATE_FORMAT(createDate,'%Y-%m-%d') &gt;= #{monthStartDate}
+		</if>
+		<if test="monthEndDate !=null and monthEndDate !=''">
+			and DATE_FORMAT(createDate,'%Y-%m-%d') &lt;= #{monthEndDate}
+		</if>
+		<if test="memberId !=null ">
+			and memberId = ${memberId}
+		</if>
+		order by id desc
+	</select>
+
+</mapper>
