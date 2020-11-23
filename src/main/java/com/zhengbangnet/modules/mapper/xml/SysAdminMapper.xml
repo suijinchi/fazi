@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.SysAdminMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, isEnabled, isSystem, name, password, username, lastIp, lastLoginDate, ip, loginDate, loginTimes, phone, email, memo, sex
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.SysAdmin" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_admin
+		 WHERE id = #{id}
+	</select>
+	
+	<!-- 查询（根据用户名查询） -->
+	<select id="getByUsername" resultType="com.zhengbangnet.modules.entity.SysAdmin" parameterType="java.lang.String">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_admin
+		 WHERE username = #{username}
+	</select>
+	
+	<!-- 根据手机号查询 -->
+	<select id="getByMobile" resultType="com.zhengbangnet.modules.entity.SysAdmin" parameterType="java.lang.String">
+		 select * FROM sys_admin where phone=#{phone}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM sys_admin
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.SysAdmin">
+		 INSERT INTO sys_admin
+ 		(createDate,modifyDate,isEnabled,isSystem,name,password,username,lastIp,lastLoginDate,ip,loginDate,loginTimes,phone,email,memo,sex) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{isEnabled},#{isSystem},#{name},#{password},#{username},#{lastIp},#{lastLoginDate},#{ip},#{loginDate},#{loginTimes},#{phone},#{email},#{memo},#{sex})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.SysAdmin">
+		 INSERT INTO sys_admin
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null">
+				 id,
+			</if>
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="isEnabled != null">
+				 isEnabled,
+			</if>
+			<if test="isSystem != null">
+				 isSystem,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="password != null">
+				 password,
+			</if>
+			<if test="username != null">
+				 username,
+			</if>
+			<if test="lastIp != null">
+				 lastIp,
+			</if>
+			<if test="lastLoginDate != null">
+				 lastLoginDate,
+			</if>
+			<if test="ip != null">
+				 ip,
+			</if>
+			<if test="loginDate != null">
+				 loginDate,
+			</if>
+			<if test="loginTimes != null">
+				 loginTimes,
+			</if>
+			<if test="phone != null">
+				 phone,
+			</if>
+			<if test="email != null">
+				 email,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+			<if test="sex != null">
+				 sex,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="isEnabled!=null">
+				 #{isEnabled},
+			</if>
+			<if test="isSystem!=null">
+				 #{isSystem},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="password!=null">
+				 #{password},
+			</if>
+			<if test="username!=null">
+				 #{username},
+			</if>
+			<if test="lastIp!=null">
+				 #{lastIp},
+			</if>
+			<if test="lastLoginDate!=null">
+				 #{lastLoginDate},
+			</if>
+			<if test="ip!=null">
+				 #{ip},
+			</if>
+			<if test="loginDate!=null">
+				 #{loginDate},
+			</if>
+			<if test="loginTimes!=null">
+				 #{loginTimes},
+			</if>
+			<if test="phone!=null">
+				 #{phone},
+			</if>
+			<if test="email!=null">
+				 #{email},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+			<if test="sex!=null">
+				 #{sex},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.SysAdmin">
+		 UPDATE sys_admin
+ 		 <set> 
+			<if test="createDate != null">
+				 createDate = #{createDate},
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="isEnabled != null">
+				 isEnabled = #{isEnabled},
+			</if>
+			<if test="isSystem != null">
+				 isSystem = #{isSystem},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="password != null">
+				 password = #{password},
+			</if>
+			<if test="username != null">
+				 username = #{username},
+			</if>
+			<if test="lastIp != null">
+				 lastIp = #{lastIp},
+			</if>
+			<if test="lastLoginDate != null">
+				 lastLoginDate = #{lastLoginDate},
+			</if>
+			<if test="ip != null">
+				 ip = #{ip},
+			</if>
+			<if test="loginDate != null">
+				 loginDate = #{loginDate},
+			</if>
+			<if test="loginTimes != null">
+				 loginTimes = #{loginTimes},
+			</if>
+			<if test="phone != null">
+				 phone = #{phone},
+			</if>
+			<if test="email != null">
+				 email = #{email},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+			<if test="sex != null">
+				 sex = #{sex},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.SysAdmin">
+		 UPDATE sys_admin
+		 SET 
+			 createDate = #{createDate},
+			 modifyDate = #{modifyDate},
+			 isEnabled = #{isEnabled},
+			 isSystem = #{isSystem},
+			 name = #{name},
+			 password = #{password},
+			 username = #{username},
+			 lastIp = #{lastIp},
+			 lastLoginDate = #{lastLoginDate},
+			 ip = #{ip},
+			 loginDate = #{loginDate},
+			 loginTimes = #{loginTimes},
+			 phone = #{phone},
+			 email = #{email},
+			 memo = #{memo},
+			 sex = #{sex}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPage" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM sys_admin
+		 where 1=1 
+		 LIMIT #{firstResult},#{pageSize} 
+	</select>
+
+	<select id="getCount" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM sys_admin
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.SysAdmin" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM sys_admin
+	</select>
+	
+		<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT *
+		 FROM sys_admin
+		 where 1=1 
+		 <if test="username != null and username!=''">
+		  and username like '%${username}%' 
+		 </if>
+		 <if test="startTime != null and startTime!=''">
+		  and createDate &gt;= #{startTime}
+		 </if>
+		 <if test="endTime != null and endTime!=''">
+		  and createDate  &lt;= #{endTime}
+		 </if>
+ <!-- 
+			<if test="id != null ">
+				 AND sys_admin.id = #{id} 
+			</if>
+ --> 
+		 order by sys_admin.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM sys_admin
+		 WHERE 1=1 
+		 <if test="username != null and username!=''">
+		  and username like '%${username}%'
+		 </if>
+		 <if test="startTime != null and startTime!=''">
+		  and createDate &gt;= #{startTime}
+		 </if>
+		 <if test="endTime != null and endTime!=''">
+		  and createDate  &lt;= #{endTime}
+		 </if>
+ <!-- 
+			<if test="id != null ">
+				 AND sys_admin.id = #{id} 
+			</if>
+ --> 
+	</select>
+</mapper>

@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.CouponTypeMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, name, subname, validDateType, validStartDate, validEndDate, validGetDay, validDays, type, cutMoney, discount, useType, byFull, memo, isReg, stock, getLimit, contact, useMemo, useScope,getNum,isShow,isWithPointShare,isDeleted
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.CouponType" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM coupon_type
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM coupon_type
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.CouponType">
+		 INSERT INTO coupon_type
+ 		(createDate,modifyDate,name,subname,validDateType,validStartDate,validEndDate,validGetDay,validDays,type,cutMoney,discount,useType,byFull,memo,isReg,stock,getLimit,contact,useMemo,useScope,getNum,isShow,isWithPointShare,isDeleted)
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{name},#{subname},#{validDateType},#{validStartDate},#{validEndDate},#{validGetDay},#{validDays},#{type},#{cutMoney},#{discount},#{useType},#{byFull},#{memo},#{isReg},#{stock},#{getLimit},#{contact},#{useMemo},#{useScope},#{getNum},#{isShow},#{isWithPointShare},#{isDeleted})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.CouponType">
+		 INSERT INTO coupon_type
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="subname != null">
+				 subname,
+			</if>
+			<if test="validDateType != null">
+				 validDateType,
+			</if>
+			<if test="validStartDate != null">
+				 validStartDate,
+			</if>
+			<if test="validEndDate != null">
+				 validEndDate,
+			</if>
+			<if test="validGetDay != null">
+				 validGetDay,
+			</if>
+			<if test="validDays != null">
+				 validDays,
+			</if>
+			<if test="type != null">
+				 type,
+			</if>
+			<if test="cutMoney != null">
+				 cutMoney,
+			</if>
+			<if test="discount != null">
+				 discount,
+			</if>
+			<if test="useType != null">
+				 useType,
+			</if>
+			<if test="byFull != null">
+				 byFull,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+			<if test="isReg != null">
+				 isReg,
+			</if>
+			<if test="stock != null">
+				 stock,
+			</if>
+			<if test="getLimit != null">
+				 getLimit,
+			</if>
+			<if test="contact != null">
+				 contact,
+			</if>
+			<if test="useMemo != null">
+				 useMemo,
+			</if>
+			<if test="useScope != null">
+				 useScope,
+			</if>
+			<if test="getNum != null">
+				getNum,
+			</if>
+			<if test="isShow != null">
+				isShow,
+			</if>
+			<if test="isWithPointShare != null">
+				isWithPointShare,
+			</if>
+			<if test="isDeleted != null">
+				isDeleted,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="subname!=null">
+				 #{subname},
+			</if>
+			<if test="validDateType!=null">
+				 #{validDateType},
+			</if>
+			<if test="validStartDate!=null">
+				 #{validStartDate},
+			</if>
+			<if test="validEndDate!=null">
+				 #{validEndDate},
+			</if>
+			<if test="validGetDay!=null">
+				 #{validGetDay},
+			</if>
+			<if test="validDays!=null">
+				 #{validDays},
+			</if>
+			<if test="type!=null">
+				 #{type},
+			</if>
+			<if test="cutMoney!=null">
+				 #{cutMoney},
+			</if>
+			<if test="discount!=null">
+				 #{discount},
+			</if>
+			<if test="useType!=null">
+				 #{useType},
+			</if>
+			<if test="byFull!=null">
+				 #{byFull},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+			<if test="isReg!=null">
+				 #{isReg},
+			</if>
+			<if test="stock!=null">
+				 #{stock},
+			</if>
+			<if test="getLimit!=null">
+				 #{getLimit},
+			</if>
+			<if test="contact!=null">
+				 #{contact},
+			</if>
+			<if test="useMemo!=null">
+				 #{useMemo},
+			</if>
+			<if test="useScope!=null">
+				 #{useScope},
+			</if>
+			<if test="getNum !=null">
+				 #{getNum},
+			</if>
+			<if test="isShow !=null">
+				 #{isShow},
+			</if>
+			<if test="isWithPointShare !=null">
+				 #{isWithPointShare},
+			</if>
+			<if test="isDeleted !=null">
+				 #{isDeleted},
+			</if>
+		 </trim>
+		<selectKey resultType="java.lang.Long" keyProperty="id">
+			SELECT
+			LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.CouponType">
+		 UPDATE coupon_type
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="subname != null">
+				 subname = #{subname},
+			</if>
+			<if test="validDateType != null">
+				 validDateType = #{validDateType},
+			</if>
+			<if test="validStartDate != null">
+				 validStartDate = #{validStartDate},
+			</if>
+			<if test="validEndDate != null">
+				 validEndDate = #{validEndDate},
+			</if>
+			<if test="validGetDay != null">
+				 validGetDay = #{validGetDay},
+			</if>
+			<if test="validDays != null">
+				 validDays = #{validDays},
+			</if>
+			<if test="type != null">
+				 type = #{type},
+			</if>
+			<if test="cutMoney != null">
+				 cutMoney = #{cutMoney},
+			</if>
+			<if test="discount != null">
+				 discount = #{discount},
+			</if>
+			<if test="useType != null">
+				 useType = #{useType},
+			</if>
+			<if test="byFull != null">
+				 byFull = #{byFull},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+			<if test="isReg != null">
+				 isReg = #{isReg},
+			</if>
+			<if test="stock != null">
+				 stock = #{stock},
+			</if>
+			<if test="getLimit != null">
+				 getLimit = #{getLimit},
+			</if>
+			<if test="contact != null">
+				 contact = #{contact},
+			</if>
+			<if test="useMemo != null">
+				 useMemo = #{useMemo},
+			</if>
+			<if test="useScope != null">
+				 useScope = #{useScope},
+			</if>
+			<if test="getNum != null">
+				getNum = #{getNum},
+			</if>
+			<if test="isShow != null">
+				isShow = #{isShow},
+			</if>
+			<if test="isWithPointShare != null">
+				isWithPointShare = #{isWithPointShare},
+			</if>
+			<if test="isDeleted != null">
+				isDeleted = #{isDeleted},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.CouponType">
+		 UPDATE coupon_type
+		 SET 
+			 modifyDate = #{modifyDate},
+			 name = #{name},
+			 subname = #{subname},
+			 validDateType = #{validDateType},
+			 validStartDate = #{validStartDate},
+			 validEndDate = #{validEndDate},
+			 validGetDay = #{validGetDay},
+			 validDays = #{validDays},
+			 type = #{type},
+			 cutMoney = #{cutMoney},
+			 discount = #{discount},
+			 useType = #{useType},
+			 byFull = #{byFull},
+			 memo = #{memo},
+			 isReg = #{isReg},
+			 stock = #{stock},
+			 getLimit = #{getLimit},
+			 contact = #{contact},
+			 useMemo = #{useMemo},
+			 useScope = #{useScope},
+			 isShow = #{isShow},
+			 getNum = #{getNum},
+			 isWithPointShare = #{isWithPointShare},
+			 isDeleted = #{isDeleted}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM coupon_type ct
+		 where 1=1 
+		<if test="name != null ">
+			 AND ct.name like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+        and ct.isDeleted = 0
+		 order by ct.createDate desc
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM coupon_type ct
+		 WHERE 1=1
+		<if test="name != null ">
+			AND ct.name like CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+        and ct.isDeleted = 0
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.CouponType" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM coupon_type
+	</select>
+
+	<select id="findValidListByParams" resultType="com.zhengbangnet.modules.entity.CouponType" >
+		SELECT DISTINCT ct.* FROM coupon_type ct
+		LEFT JOIN coupon_type_product ctp ON ct.id = ctp.couponTypeId
+		WHERE 1=1
+		and ct.isShow = 1
+		and ct.isDeleted = 0
+		AND
+		(
+		(
+		ct.validDateType = 1
+		AND
+		ct.validEndDate >= #{now}
+		)
+		OR
+		ct.validDateType = 2
+		)
+		AND ct.stock > 0
+		AND
+		(
+		(
+		ct.useScope = 2
+		AND ctp.productId = #{productId}
+		)
+		OR
+		ct.useScope = 1
+		)
+	</select>
+
+
+	<select id="findValidPageByParams" resultType="java.util.Map" >
+		SELECT ct.*
+		FROM coupon_type ct
+		WHERE 1=1
+		AND
+		(
+			(
+				ct.validDateType = 1
+				AND
+				ct.validEndDate >= #{now}
+			)
+			OR
+			ct.validDateType = 2
+		)
+		AND ct.stock > 0
+		AND
+		(
+			(
+				ct.useScope = 2
+			)
+			OR
+				ct.useScope = 1
+		)
+		and ct.isDeleted = 0
+		and ct.isShow = 1
+		order by ct.createDate desc
+		LIMIT #{pageable.firstResult},#{pageable.pageSize}
+	</select>
+	<select id="getValidCountByParams" resultType="java.lang.Long" >
+		SELECT COUNT(ct.id)
+		FROM coupon_type ct
+		WHERE 1=1
+		AND
+		(
+			(
+				ct.validDateType = 1
+				AND
+				ct.validEndDate >= #{now}
+			)
+			OR
+			ct.validDateType = 2
+		)
+		AND ct.stock > 0
+		AND
+		(
+			(
+				ct.useScope = 2
+			)
+			OR
+				ct.useScope = 1
+		)
+		and ct.isDeleted = 0
+		and ct.isShow = 1
+	</select>
+
+
+</mapper>

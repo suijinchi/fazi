@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.BirthdayCardMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, name, orders
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.BirthdayCard" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM birthday_card
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM birthday_card
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.BirthdayCard">
+		 INSERT INTO birthday_card
+ 		(name,orders) 
+		 VALUES 
+ 		(#{name},#{orders})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.BirthdayCard">
+		 INSERT INTO birthday_card
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="orders != null">
+				 orders,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="orders!=null">
+				 #{orders},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.BirthdayCard">
+		 UPDATE birthday_card
+ 		 <set> 
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="orders != null">
+				 orders = #{orders},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.BirthdayCard">
+		 UPDATE birthday_card
+		 SET 
+			 name = #{name},
+			 orders = #{orders}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM birthday_card
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND birthday_card.id = #{id} 
+			</if>
+ --> 
+		 order by birthday_card.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM birthday_card
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND birthday_card.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.BirthdayCard" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM birthday_card order by if(isnull(orders),0,1) desc,orders asc
+	</select>
+
+</mapper>

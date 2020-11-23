@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.PaymentMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, amount, sn, paySn, payDate, memberId, type, payId, status
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Payment" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM payment
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM payment
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Payment">
+		 INSERT INTO payment
+ 		(createDate,modifyDate,amount,sn,paySn,payDate,memberId,type,payId,status) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{amount},#{sn},#{paySn},#{payDate},#{memberId},#{type},#{payId},#{status})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Payment">
+		 INSERT INTO payment
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="amount != null">
+				 amount,
+			</if>
+			<if test="sn != null">
+				 sn,
+			</if>
+			<if test="paySn != null">
+				 paySn,
+			</if>
+			<if test="payDate != null">
+				 payDate,
+			</if>
+			<if test="memberId != null">
+				 memberId,
+			</if>
+			<if test="type != null">
+				 type,
+			</if>
+			<if test="payId != null">
+				 payId,
+			</if>
+			<if test="status != null">
+				 status,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="amount!=null">
+				 #{amount},
+			</if>
+			<if test="sn!=null">
+				 #{sn},
+			</if>
+			<if test="paySn!=null">
+				 #{paySn},
+			</if>
+			<if test="payDate!=null">
+				 #{payDate},
+			</if>
+			<if test="memberId!=null">
+				 #{memberId},
+			</if>
+			<if test="type!=null">
+				 #{type},
+			</if>
+			<if test="payId!=null">
+				 #{payId},
+			</if>
+			<if test="status!=null">
+				 #{status},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Payment">
+		 UPDATE payment
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="amount != null">
+				 amount = #{amount},
+			</if>
+			<if test="sn != null">
+				 sn = #{sn},
+			</if>
+			<if test="paySn != null">
+				 paySn = #{paySn},
+			</if>
+			<if test="payDate != null">
+				 payDate = #{payDate},
+			</if>
+			<if test="memberId != null">
+				 memberId = #{memberId},
+			</if>
+			<if test="type != null">
+				 type = #{type},
+			</if>
+			<if test="payId != null">
+				 payId = #{payId},
+			</if>
+			<if test="status != null">
+				 status = #{status},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Payment">
+		 UPDATE payment
+		 SET 
+			 modifyDate = #{modifyDate},
+			 amount = #{amount},
+			 sn = #{sn},
+			 paySn = #{paySn},
+			 payDate = #{payDate},
+			 memberId = #{memberId},
+			 type = #{type},
+			 payId = #{payId},
+			 status = #{status}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM payment
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND payment.id = #{id} 
+			</if>
+ --> 
+		 order by payment.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM payment
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND payment.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Payment" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM payment
+	</select>
+	
+	<select id="getBySn" resultType="com.zhengbangnet.modules.entity.Payment" >
+		 SELECT  <include refid="Base_Column_List" /> FROM payment
+		 WHERE 1=1 and sn = #{sn}
+	</select>
+
+
+	<select id="getBySuccess" resultType="com.zhengbangnet.modules.entity.Payment" >
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM payment
+		WHERE 1=1 and (
+			payId = #{ordersId}
+		)
+		and status = 1
+		AND type = #{type}
+	</select>
+
+</mapper>

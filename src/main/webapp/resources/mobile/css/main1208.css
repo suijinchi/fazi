@@ -1,0 +1,59 @@
+.footer-jjyw{
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 56px;
+	padding: 2px 0;
+	text-align: center;
+	background: #fff;
+	font-size: 0.9em;
+	border-top: 1px solid #ededed;
+}
+.footer-jjyw a{
+	color: #aeaeae;
+}
+.footer-jjyw a.cur{
+	color: #4ebed0;
+}
+.footer-jjyw a i{
+	display: block;
+	font-size: 20px;
+}
+/*签到*/
+.sign-top{
+	text-align: center;
+	padding: 12% 1%;
+	color: #000307;
+	background: #eaf4f5;
+}
+.sign-top a{
+	color: #000307;
+}
+.sign-top .btn-sign{
+	width: 90px;
+	height: 90px;
+	line-height: 90px;
+	border-radius: 100%;
+	background: #5ac5d5;
+	color: #fff;
+	border:5px solid #c1dedc;
+	margin: auto;
+}
+.sign-top .number{
+	display: block;
+	margin-top: 20px;
+	color: #69bacb;
+	font-size: 16px;
+}
+.sign-top .text{
+	font-size: 0.9em;
+}
+.sign-main .box-navigation{
+	background: #8ac4cf;
+	padding: 2% 0;
+}
+.sign-main .box-navigation a{
+	color: #fff;
+	font-size: 0.8em;
+}

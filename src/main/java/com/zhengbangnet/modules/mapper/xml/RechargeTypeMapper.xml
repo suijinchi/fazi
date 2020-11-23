@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.RechargeTypeMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, name, amount, orders, giveAmount, memo,isShow
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.RechargeType" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM recharge_type
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM recharge_type
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.RechargeType">
+		 INSERT INTO recharge_type
+ 		(name,amount,orders,giveAmount,memo,isShow)
+		 VALUES 
+ 		(#{name},#{amount},#{orders},#{giveAmount},#{memo},#{isShow})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.RechargeType">
+		 INSERT INTO recharge_type
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="amount != null">
+				 amount,
+			</if>
+			<if test="orders != null">
+				 orders,
+			</if>
+			<if test="giveAmount != null">
+				 giveAmount,
+			</if>
+			<if test="memo != null">
+				 memo,
+			</if>
+			<if test="isShow != null">
+				isShow,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="amount!=null">
+				 #{amount},
+			</if>
+			<if test="orders!=null">
+				 #{orders},
+			</if>
+			<if test="giveAmount!=null">
+				 #{giveAmount},
+			</if>
+			<if test="memo!=null">
+				 #{memo},
+			</if>
+			<if test="isShow!=null">
+				 #{isShow},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.RechargeType">
+		 UPDATE recharge_type
+ 		 <set> 
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="amount != null">
+				 amount = #{amount},
+			</if>
+			<if test="orders != null">
+				 orders = #{orders},
+			</if>
+			<if test="giveAmount != null">
+				 giveAmount = #{giveAmount},
+			</if>
+			<if test="memo != null">
+				 memo = #{memo},
+			</if>
+			<if test="isShow != null">
+				isShow = #{isShow},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.RechargeType">
+		 UPDATE recharge_type
+		 SET 
+			 name = #{name},
+			 amount = #{amount},
+			 orders = #{orders},
+			 giveAmount = #{giveAmount},
+			 memo = #{memo},
+			 isShow = #{isShow}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM recharge_type
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND recharge_type.id = #{id} 
+			</if>
+ --> 
+		 order by recharge_type.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM recharge_type
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND recharge_type.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.RechargeType" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM recharge_type
+	</select>
+
+
+	<select id="findListByParams" resultType="java.util.Map" >
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM recharge_type rt
+		WHERE 1=1
+		<if test="isShow!=null">
+			and rt.isShow = #{isShow}
+		</if>
+		order by orders asc
+	</select>
+
+</mapper>

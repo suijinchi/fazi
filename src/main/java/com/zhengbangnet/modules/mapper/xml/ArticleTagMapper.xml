@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.ArticleTagMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		articleId, tagId
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.ArticleTag" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM article_tag
+		 WHERE articleId = #{articleId}
+	</select>
+
+	<select id="getByTagId" resultType="com.zhengbangnet.modules.entity.ArticleTag" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM article_tag
+		WHERE tagId = #{tagId}
+	</select>
+
+	<select id="getByArticleId" resultType="com.zhengbangnet.modules.entity.ArticleTag" parameterType="java.lang.Long">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM article_tag
+		WHERE articleId = #{articleId}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM article_tag
+		 WHERE articleId = #{articleId}
+	</delete>
+
+	<delete id="deleteByArticleId" parameterType="java.lang.Long">
+		DELETE FROM article_tag
+		WHERE articleId = #{articleId}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.ArticleTag">
+		 INSERT INTO article_tag
+ 		(tagId, articleId)
+		 VALUES 
+ 		(#{tagId},#{articleId})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.ArticleTag">
+		 INSERT INTO article_tag
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="articleId != null">
+				 articleId,
+			</if>
+			<if test="tagId != null">
+				 tagId,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="tagId!=null">
+				 #{tagId},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.ArticleTag">
+		 UPDATE article_tag
+ 		 <set> 
+			<if test="tagId != null">
+				 tagId = #{tagId},
+			</if>
+
+ 		 </set>
+		 WHERE articleId = #{articleId}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.ArticleTag">
+		 UPDATE article_tag
+		 SET 
+			 tagId = #{tagId}
+		 WHERE articleId = #{articleId}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM article_tag
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND article_tag.id = #{id} 
+			</if>
+ --> 
+		 order by article_tag.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(articleId) FROM article_tag
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND article_tag.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.ArticleTag" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM article_tag
+	</select>
+
+</mapper>

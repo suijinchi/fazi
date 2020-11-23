@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.MessageLogMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, ip, mobile, msgCode, sendDate, type, isUsed
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.MessageLog" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM message_log
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM message_log
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.MessageLog">
+		 INSERT INTO message_log
+ 		(createDate,modifyDate,ip,mobile,msgCode,sendDate,type,isUsed) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{ip},#{mobile},#{msgCode},#{sendDate},#{type},#{isUsed})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.MessageLog">
+		 INSERT INTO message_log
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="ip != null">
+				 ip,
+			</if>
+			<if test="mobile != null">
+				 mobile,
+			</if>
+			<if test="msgCode != null">
+				 msgCode,
+			</if>
+			<if test="sendDate != null">
+				 sendDate,
+			</if>
+			<if test="type != null">
+				 type,
+			</if>
+			<if test="isUsed != null">
+				 isUsed,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="ip!=null">
+				 #{ip},
+			</if>
+			<if test="mobile!=null">
+				 #{mobile},
+			</if>
+			<if test="msgCode!=null">
+				 #{msgCode},
+			</if>
+			<if test="sendDate!=null">
+				 #{sendDate},
+			</if>
+			<if test="type!=null">
+				 #{type},
+			</if>
+			<if test="isUsed!=null">
+				 #{isUsed},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.MessageLog">
+		 UPDATE message_log
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="ip != null">
+				 ip = #{ip},
+			</if>
+			<if test="mobile != null">
+				 mobile = #{mobile},
+			</if>
+			<if test="msgCode != null">
+				 msgCode = #{msgCode},
+			</if>
+			<if test="sendDate != null">
+				 sendDate = #{sendDate},
+			</if>
+			<if test="type != null">
+				 type = #{type},
+			</if>
+			<if test="isUsed != null">
+				 isUsed = #{isUsed},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.MessageLog">
+		 UPDATE message_log
+		 SET 
+			 modifyDate = #{modifyDate},
+			 ip = #{ip},
+			 mobile = #{mobile},
+			 msgCode = #{msgCode},
+			 sendDate = #{sendDate},
+			 type = #{type},
+			 isUsed = #{isUsed}
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM message_log
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND message_log.id = #{id} 
+			</if>
+ --> 
+		 order by message_log.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM message_log
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND message_log.id = #{id} 
+			</if>
+ --> 
+	</select>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.MessageLog" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM message_log
+	</select>
+
+
+	<select id="getByMobile" resultType="com.zhengbangnet.modules.entity.MessageLog">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM message_log
+		WHERE 1=1
+		AND mobile = #{mobile}
+		AND type = #{type}
+		AND isUsed = '0'
+		order by createDate desc
+		limit 1
+	</select>
+
+	<select id="findCountByMobile" resultType="java.lang.Long">
+		SELECT count(id)
+		FROM message_log
+		WHERE 1=1
+		AND mobile = #{mobile}
+		AND DATE_FORMAT(#{date},'%Y-%m-%d %T') = DATE_FORMAT(message_log.sendDate,'%Y-%m-%d %T')
+	</select>
+
+	<select id="findCountByIp" resultType="java.lang.Long">
+		SELECT count(id)
+		FROM message_log
+		WHERE 1=1
+		AND ip = #{ip}
+		AND DATE_FORMAT(#{date},'%Y-%m-%d %T') = DATE_FORMAT(message_log.sendDate,'%Y-%m-%d %T')
+	</select>
+
+</mapper>

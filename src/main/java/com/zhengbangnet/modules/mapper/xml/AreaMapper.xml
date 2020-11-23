@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.AreaMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, fullName, name, treePath, parentId, orders
+	</sql>
+	
+	<select id="superSelect" parameterType="String" resultType="java.util.HashMap"> 
+		${value}
+	</select>
+
+	<select id="superSelectList" parameterType="String" resultType="java.util.HashMap"> 
+		${value}
+	</select>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.Area" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM area
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM area
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.Area">
+		 INSERT INTO area
+ 		(createDate,modifyDate,fullName,name,treePath,parentId,orders) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{fullName},#{name},#{treePath},#{parentId},#{orders})
+	 <selectKey resultType="java.lang.Long" keyProperty="id">
+		 SELECT 
+		 LAST_INSERT_ID() 
+	 </selectKey> 
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.Area">
+		 INSERT INTO area
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="fullName != null">
+				 fullName,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="treePath != null">
+				 treePath,
+			</if>
+			<if test="parentId != null">
+				 parentId,
+			</if>
+			<if test="orders != null">
+				 orders,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="fullName!=null">
+				 #{fullName},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="treePath!=null">
+				 #{treePath},
+			</if>
+			<if test="parentId!=null">
+				 #{parentId},
+			</if>
+			<if test="orders!=null">
+				 #{orders},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.Area">
+		 UPDATE area
+ 		 <set> 
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="fullName != null">
+				 fullName = #{fullName},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="treePath != null">
+				 treePath = #{treePath},
+			</if>
+			<if test="parentId != null">
+				 parentId = #{parentId},
+			</if>
+			<if test="orders != null">
+				 orders = #{orders},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.Area">
+		 UPDATE area
+		 SET 
+			 modifyDate = #{modifyDate},
+			 fullName = #{fullName},
+			 name = #{name},
+			 treePath = #{treePath},
+			 parentId = #{parentId},
+			 orders = #{orders}
+		 WHERE id = #{id}
+	</update>
+	
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.Area" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM area
+	</select>
+
+	<select id="findListByParams" resultType="java.util.Map" >
+		 SELECT
+			 <include refid="Base_Column_List" />
+		 FROM area
+		 WHERE 1=1 
+	</select>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 FROM area
+		 where 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND area.id = #{id} 
+			</if>
+ --> 
+		 order by area.createDate desc 
+		 LIMIT #{pageable.firstResult},#{pageable.pageSize} 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM area
+		 WHERE 1=1 
+ <!-- 
+			<if test="id != null ">
+				 AND area.id = #{id} 
+			</if>
+ --> 
+	</select>
+	
+	<select id="findRoots" resultType="com.zhengbangnet.modules.entity.Area" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM area 
+		 WHERE parentId IS NULL order by parentId asc
+	</select>
+	
+	<select id="findChildren" parameterType="java.lang.Long" resultType="com.zhengbangnet.modules.entity.Area" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM area 
+		 WHERE parentId = #{parentId}
+	</select>
+	
+	<select id="findByName" resultType="com.zhengbangnet.modules.entity.Area">
+		select * from Area where name = #{name}
+	</select>
+	
+	<select id="findByFullName" resultType="com.zhengbangnet.modules.entity.Area">
+		select * from Area where fullName = #{fullName}
+	</select>
+	
+	<select id="findProvice" resultType="com.zhengbangnet.modules.entity.Area">
+		select * from Area where name like #{name}
+	</select>
+	
+	<select id="findCity" resultType="com.zhengbangnet.modules.entity.Area">
+		select * from Area where parentId is not null and name like #{name}
+	</select>
+	
+	<select id="findParentId" resultType="com.zhengbangnet.modules.entity.Area">
+		select * from Area where parentId = #{parentId}
+	</select>
+
+</mapper>

@@ -1,0 +1,93 @@
+/*内容*/
+
+#dimension {
+	width: 100%;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+}
+
+#dimension>li {
+	height: 45px;
+	line-height: 45px;
+	width: 100%;
+}
+
+#dimension ul {
+	margin-left: 10px;
+	border-bottom: 1px solid #eee;
+	font-size: 13px;
+}
+
+#dimension ul li.l1 {
+	width: 20%;
+	float: left;
+	text-align: left;
+	color: #333;
+	margin-right: 15px;
+}
+
+#dimension ul li.l2 {
+	float: left;
+	width: 60%;
+}
+
+#dimension ul li input {
+	border: none;
+	outline: none;
+	width: 100%;
+	color: #999;
+	font-size: 14px;
+}
+
+
+/*保存*/
+
+#baocun {
+	width: 100%;
+	height: 48px;
+	margin-top: 15px;
+	text-align: center;
+	background: #f6f6f6;
+}
+
+#baocun .btn {
+	width: 90%;
+	height: 43px;
+	border: 0;
+	border-radius: 3px;
+	background: #ff7d84;
+	color: #fff;
+	font-size: 17px;
+	line-height: 43px;
+	text-align: center;
+	-webkit-appearance: none;
+}
+
+.item_select {
+	width: 31.3%;
+	height: 35px;
+	margin-right: 2%;
+	margin-top: 5px;
+	line-height: 35px;
+	font-size: 14px;
+	position: relative;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	border-radius: 5px;
+}
+
+.city_select {
+	border: 0;
+	outline: none;
+	background: transparent;
+	-webkit-tap-highlight-color: transparent;
+}
+
+.item_select .right_tran {
+	position: absolute;
+	right: 0px;
+	top: 7px;
+	height: 35px;
+	line-height: 35px;
+}

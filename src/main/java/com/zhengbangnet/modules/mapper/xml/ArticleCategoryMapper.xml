@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhengbangnet.modules.mapper.ArticleCategoryMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, createDate, modifyDate, name, treePath, parent, orders, grade
+	</sql>
+
+	<select id="superSelect" parameterType="String" resultType="java.util.HashMap"> 
+		${value}
+	</select>
+
+	<select id="superSelectList" parameterType="String" resultType="java.util.HashMap"> 
+		${value}
+	</select>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="getByPrimaryKey" resultType="com.zhengbangnet.modules.entity.ArticleCategory" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM article_category
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM article_category
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zhengbangnet.modules.entity.ArticleCategory" useGeneratedKeys="true" keyProperty="id">
+		 INSERT INTO article_category
+ 		(createDate,modifyDate,name,treePath,parent,orders,grade) 
+		 VALUES 
+ 		(#{createDate},#{modifyDate},#{name},#{treePath},#{parent},#{orders},#{grade})
+	</insert>
+
+	<!-- 添加 （匹配有值的字段）-->
+	<insert id="insertSelective" parameterType="com.zhengbangnet.modules.entity.ArticleCategory" useGeneratedKeys="true" keyProperty="id">
+		 INSERT INTO article_category
+		 <trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="createDate != null">
+				 createDate,
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate,
+			</if>
+			<if test="name != null">
+				 name,
+			</if>
+			<if test="treePath != null">
+				 treePath,
+			</if>
+			<if test="parent != null">
+				 parent,
+			</if>
+			<if test="orders != null">
+				 orders,
+			</if>
+			<if test="grade != null">
+				 grade,
+			</if>
+
+		 </trim>
+		 <trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id!=null">
+				 #{id},
+			</if>
+			<if test="createDate!=null">
+				 #{createDate},
+			</if>
+			<if test="modifyDate!=null">
+				 #{modifyDate},
+			</if>
+			<if test="name!=null">
+				 #{name},
+			</if>
+			<if test="treePath!=null">
+				 #{treePath},
+			</if>
+			<if test="parent!=null">
+				 #{parent},
+			</if>
+			<if test="orders!=null">
+				 #{orders},
+			</if>
+			<if test="grade!=null">
+				 #{grade},
+			</if>
+		 </trim>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhengbangnet.modules.entity.ArticleCategory">
+		 UPDATE article_category
+ 		 <set> 
+			<if test="createDate != null">
+				 createDate = #{createDate},
+			</if>
+			<if test="modifyDate != null">
+				 modifyDate = #{modifyDate},
+			</if>
+			<if test="name != null">
+				 name = #{name},
+			</if>
+			<if test="treePath != null">
+				 treePath = #{treePath},
+			</if>
+			<if test="parent != null">
+				 parent = #{parent},
+			</if>
+			<if test="orders != null">
+				 orders = #{orders},
+			</if>
+			<if test="grade != null">
+				 grade = #{grade},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKey" parameterType="com.zhengbangnet.modules.entity.ArticleCategory">
+		 UPDATE article_category
+		 SET 
+			 createDate = #{createDate},
+			 modifyDate = #{modifyDate},
+			 name = #{name},
+			 treePath = #{treePath},
+			 parent = #{parent},
+			 orders = #{orders},
+			 grade = #{grade}
+		 WHERE id = #{id}
+	</update>
+
+	<select id="findAll" resultType="com.zhengbangnet.modules.entity.ArticleCategory" >
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM article_category
+	</select>
+
+	<select id="findListByParams" resultType="java.util.Map" >
+		 SELECT
+			 <include refid="Base_Column_List" />
+		 FROM article_category
+		 WHERE 1=1 
+	</select>
+
+	<!-- 分页查询-->
+	<select id="findPageByParams" resultType="java.util.Map" >
+		 SELECT TOP ${pageable.pageSize} * FROM (
+			 SELECT 
+			 ROW_NUMBER() OVER (order by id) AS RowNumber,* 
+			 from article_category
+		 ) a  where RowNumber > ${pageable.pageSize}*(${pageable.pageNo}-1) 
+	</select>
+	<select id="getCountByParams" resultType="java.lang.Long" >
+		 SELECT COUNT(id) FROM article_category
+		 WHERE 1=1 
+	</select>
+</mapper>
