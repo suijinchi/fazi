@@ -19,7 +19,7 @@
         <spring.version>4.1.7.RELEASE</spring.version>
         <mybatis.version>3.3.1</mybatis.version>
         <mybatis.spring.version>1.2.4</mybatis.spring.version>
-        <mysql.version>5.1.29</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
 		
         <mysql.connector.java.version>5.1.20</mysql.connector.java.version>
         
